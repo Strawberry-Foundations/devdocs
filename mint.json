@@ -21,6 +21,12 @@
       "url": "https://github.com/Strawberry-Foundations/"
     }
   ],
+  "tabs": [
+    {
+      "name": "German documentation (Not working atm)",
+      "url": "german"
+    }
+  ],
   "anchors": [
 
   ],
@@ -28,6 +34,10 @@
     {
       "group": "Get Started",
       "pages": ["introduction", "history", "coreteam"]
+    },
+    {
+      "group": "JSON Communication",
+      "pages": ["json-communication/introduction", "json-communication/implementing"]
     }
   ],
   "footerSocials": {

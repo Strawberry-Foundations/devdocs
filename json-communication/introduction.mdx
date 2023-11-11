@@ -1,0 +1,37 @@
+---
+title: Introduction to JSON Communication
+description: This should give you a general idea what JSON Communication is about
+---
+
+# What? Why? How?
+You may wonder and ask yourself what even is this? Well, this is a way how 2 socket instances communicate with
+each-other, this was primarily designed for Strawberry Chat to send data between the server and the client such as
+username, badges and messages, but we decided to make a small guide on how to implement it into your client.
+
+# The Idea
+The original concept for it was posted to our projects board on [GitHub](https://github.com/orgs/Strawberry-Foundations/projects/1?pane=issue&itemId=44311144) on November 10th 2023
+
+# Example code
+
+<Info> This is a very basic example of JSON Communication which is used in Strawberry Chat </Info>
+
+<CodeGroup>
+
+    ```json JSON
+    {
+        "message_type": "user_message", // Type of the message, usually user_message
+        "username": "julian", // Username should be all lowercase and without spaces
+        "nickname": "Julian The Great", // Nicknames can contain any UTF-8 character and spaces
+        "badge": "👑", // Emoji
+        "role_color": "\u001b[31m\u001b[1m", // This uses ANSI colors, example given here is red & bold
+        "message": {
+            "content": "Hello World!"
+        }
+    }
+    ```
+
+    ```python Python
+    # Receive code of the client
+    ```
+
+</CodeGroup>
