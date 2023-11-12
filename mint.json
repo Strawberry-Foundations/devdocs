@@ -27,33 +27,46 @@
       "url": "german"
     }
   ],
-  "anchors": [
-
-  ],
+  "anchors": [],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "history", "coreteam"]
+      "pages": [
+        "introduction",
+        "history",
+        "coreteam"
+      ]
     },
     {
       "group": "SCAPI",
-      "pages": ["scapi/introduction"]
+      "pages": [
+        "scapi/introduction"
+      ]
     },
     {
       "group": "spkg",
-      "pages": ["spkg/introduction", "spkg/usage"]
+      "pages": [
+        "spkg/introduction",
+        "spkg/usage"
+      ]
     },
     {
       "group": "JSON Communication",
-      "pages": ["json-communication/introduction", "json-communication/implementing"]
+      "pages": [
+        "json-communication/introduction",
+        "json-communication/implementing"
+      ]
     },
     {
       "group": "archhelper",
-      "pages": ["archhelper/introduction"]
+      "pages": [
+        "archhelper/introduction"
+      ]
     }
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/strawberryfnds",
     "github": "https://github.com/Strawberry-Foundations"
-  }
+  },
+  "feedback.thumbsRating": true
 }
