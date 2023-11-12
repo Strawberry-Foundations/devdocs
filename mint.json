@@ -41,7 +41,7 @@
     },
     {
       "group": "spkg",
-      "pages": ["spkg/introduction", "spkg/usage"]
+      "pages": ["spkg/introduction", "spkg/usage", "spkg/features"]
     },
     {
       "group": "JSON Communication",

@@ -17,3 +17,70 @@ Using spkg is relatively simple, you call the command and add the arguments, lik
 spkg install gba-driver
 ```
 
+# Help
+
+This is the help dialog that spkg will print
+
+```
+Advanced Source Package Managment (spkg) 2.0.0beta1 (20231012) x86_64
+W: This is a development version of spkg!
+
+call: spkg [command] <argument>
+
+spkg is a package manager that downloads the source code of the desired
+package (usually) from the official sources,
+and then compiles it for your device.
+The goal of spkg is to easily and without much experience get the latest
+the latest official versions of programs, even under distro
+even on distros that do not offer the latest version.
+By compiling the package, the program is optimized for your device and runs
+and runs accordingly optimized.
+
+Commands:
+ -> install: Installs a package
+ -> remove: Removes a package
+ -> reinstall: Reinstalls a package
+ -> update: Checks for package updates
+ -> upgrade: Updates a package
+ -> sync: Synchronizes the package databases
+ -> info: Gives you information about a package
+ -> list: Lists available packages
+ -> download: Downloads a package
+ -> build: Builds various things *^____^*
+ -> world: Builds the local world database from scratch
+ -> plugins: Plugin management
+ -> list: Lists all installed plugins
+ -> exec: Executes a command of a plugin
+ -> enable: Enables a plugin
+ -> disable: Disables a plugin
+ -> market: Plugin Marketplace
+ -> list: Lists available plugins
+ -> get: Installs a plugin
+ -> config: Configuration management
+ -> language: Language configuration
+
+Copyright (C) 2023 Juliandev02 @ Strawberry Foundations - Made with <3
+```
+
+# Installing a package
+
+You can install a package by using
+
+```bash
+spkg install [packagegroup]/<packagename>
+```
+
+`packagegroup` is optional, if there should be multiple packages with the same name, please use `packagegroup`
+
+Replace `<packagename>` with the package you want to install e.g. `htop`, `libbismuth-git` or `python3.12`.
+
+# Uninstalling a package
+
+Uninstalling a package is very similar to installing a package, just run the same command you used to install the
+package, but replace `install` with `remove`, like this:
+
+```bash
+spkg remove [packagegroup]/<packagename>
+```
+
+Package groups apply to removing packages too.
