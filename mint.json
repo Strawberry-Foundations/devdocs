@@ -36,8 +36,20 @@
       "pages": ["introduction", "history", "coreteam"]
     },
     {
+      "group": "SCAPI",
+      "pages": ["scapi/introduction"]
+    },
+    {
+      "group": "spkg",
+      "pages": ["spkg/introduction", "spkg/usage"]
+    },
+    {
       "group": "JSON Communication",
       "pages": ["json-communication/introduction", "json-communication/implementing"]
+    },
+    {
+      "group": "archhelper",
+      "pages": ["archhelper/introduction"]
     }
   ],
   "footerSocials": {
