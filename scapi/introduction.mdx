@@ -9,20 +9,24 @@ SCAPI (Strawberry Chat API) is the API for, you guessed it, Strawberry Chat. It 
 for Strawberry Chat.
 
 # Supported scapi versions in Strawberry Chat
-<Warning>This only applies to Strawberry Chat, not other programs</Warning>
-
 See this chart below
 
 |                     | v1.8.0 ![](https://img.shields.io/badge/OldStable-green)   | v1.8.1 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
 |---------------------|------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
-| Dev `v0.11.0`       |  ✅                                                        | ✅                                                     | ❌                                                     |
-| Canary `>=v0.12.0`  |  ✅ (CM)                                                   | ✅ (CM)                                                | ✅                                                     | 
+| Dev `v0.11.0`       |  ✅                                                        | ✅                                                     | ❌²                                                    |
+| Canary `v0.12.0`    |  ✅ (CM¹)                                                  | ✅ (CM¹)                                               | ✅                                                     | 
+| Canary `>=v0.12.1`  |  ✅ (CM)                                                   | ✅ (CM)                                                | ✅                                                     | 
 
 <Tip>
     ### Compatibility Mode (CM)
     As of Scapi Canary v0.12.0, we have added a feature that allows bots to connect to old servers.
     This is called Compatibility Mode.
     [See more](/json-communication/introduction)
-    
-    <Warning>Compatibility Mode is currently not fully available for scapi.</Warning>
 </Tip>
+
+<Warning>Manual configuration of the compatibility mode is currently only available for Scapi Canary v0.12.1.</Warning>
+
+**¹** Scapi Canary `v0.12.0` does not have manual configuration of the compatibility mode. You must change an argument in Scapi's source code for the configuration.
+We therefore recommend to always use the latest available version from our [Canary GitHub branch](https://github.com/Strawberry-Foundations/strawberry-chat/tree/json-communication)
+
+**²** Scapi Dev `v0.11.0` only supports the old, legacy communication system (v1.8.1 or lower). Using `v0.11.0` on a newer server (v1.9.0 or higher) will result in broken messages
