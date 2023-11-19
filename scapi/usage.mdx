@@ -1,0 +1,129 @@
+---
+title: Usage
+description: How to use SCAPI
+---
+
+# Getting scapi
+Our main scapi file can be found [here](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/bot/scapi.py).
+Simply place this file in the folder where you want to program your bot. You can find out how to use scapi in your code below. 
+
+We also recommend that you take a look at our [scapi bot directory](https://github.com/Strawberry-Foundations/strawberry-chat/tree/main/bot) to get an overview of how a bot can be structured. 
+
+# Using scapi in your code
+Scapi gets easier with every update. To import Scapi, use Python's `import` statement:
+```python
+import scapi            # import basic scapi
+from scapi import Scapi # import the scapi bot class
+```
+
+<Tip>We recommend using YAML for configuration files. You can install YAML using `pip` (`pip install pyyaml`)</Tip>
+
+# Write your first bot
+<Warning>This documentation part only applies to scapi v0.11.0</Warning>
+
+Scapi has 2 different methods to write a bot. One method is newer and clearer, but is not yet fully developed. This is called `Commands`.
+
+<CodeGroup>
+    ```python Commands Module
+    import scapi
+    from scapi import Scapi
+
+    import yaml
+    from yaml import SafeLoader
+
+    with open("default.yml", encoding="utf-8") as config_file:
+        config = yaml.load(config_file, Loader=SafeLoader)
+
+    username    = config["bot"]["username"]
+    token       = config["bot"]["token"]
+    host        = config["server"]["host"]
+    port        = config["server"]["port"]
+    prefix      = config["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port)
+    Bot.login()
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+
+    Bot.permission_handler(custom_list=["your_name"], owner="your_name")
+
+    @Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+    def test_command(username: str, args: list):
+        Bot.send_message(f"""
+            Username: {username}
+            Args: {args}"""
+            )
+
+    @Bot.event
+    def on_ready():
+        print(f"{Bot.log_msg}{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}")
+        
+    Bot.run(on_ready)
+    ```
+
+    ```python Original Method
+    import scapi
+    from scapi import Scapi
+
+    import yaml
+    from yaml import SafeLoader
+    import threading
+
+    with open("default.yml", encoding="utf-8") as config:
+        conf = yaml.load(config, Loader=SafeLoader)
+
+    username    = conf["bot"]["username"]
+    token       = conf["bot"]["token"]
+    host        = conf["server"]["host"]
+    port        = conf["server"]["port"]
+    prefix      = conf["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port)
+    Bot.login()
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+
+
+    def Commands():
+        while True:
+            try:
+                message = Bot.recv_message(raw=True)
+            
+                if message.startswith("!hello "):
+                    Bot.send_message(f"Hello, world!")
+                        
+            except: 
+                Bot.logger(f"{scapi.RED}An unknown exception occured{scapi.RESET}", type=Scapi.LogLevel.ERROR)
+                break
+
+
+    @Bot.event
+    def on_ready():
+        print(f"{Bot.log_msg}{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}")
+        
+    BotThread = threading.Thread(target=Bot.run, args=(on_ready,))
+    CommandThread = threading.Thread(target=Commands)
+
+    BotThread.start()
+    CommandThread.start()
+    ```
+
+</CodeGroup>
+
+
+
+# Supported scapi versions in Strawberry Chat
+<Warning>This only applies to Strawberry Chat, not other programs</Warning>
+
+See this chart below
+
+|                     | v1.8.0 ![](https://img.shields.io/badge/OldStable-green)   | v1.8.1 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
+|---------------------|------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
+| Dev `v0.11.0`       |  ✅                                                        | ✅                                                     | ❌                                                     |
+| Canary `>=v0.12.0`  |  ✅ (CM)                                                   | ✅ (CM)                                                | ✅                                                     | 
+
+<Tip>
+    ### Compatibility Mode (CM)
+    As of Scapi Canary v0.12.0, we have added a feature that allows bots to connect to old servers.
+    This is called Compatibility Mode.
+    
+    <Warning>Compatibility Mode is currently not fully available for scapi.</Warning>
+</Tip>
