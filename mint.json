@@ -41,7 +41,7 @@
     },
     {
       "group": "SCAPI",
-      "pages": ["scapi/introduction"]
+      "pages": ["scapi/introduction", "scapi/usage"]
     },
     {
       "group": "spkg",
