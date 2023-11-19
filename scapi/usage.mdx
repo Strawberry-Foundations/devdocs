@@ -23,8 +23,13 @@ from scapi import Scapi # import the scapi bot class
 
 Scapi has 2 different methods to write a bot. One method is newer and clearer, but is not yet fully developed. This is called `Commands`.
 
+The other method is the original. This is more difficult, but can be adapted considerably more. This method is still used for pure `on_message` events to accept and process pure messages. 
+This method is called `Original`
+
+<Tip>We recommend using the command method as it offers more features & more support than the original method (e.g. permissions)</Tip>
+
 <CodeGroup>
-    ```python Commands Module
+    ```python Commands Method
     import scapi
     from scapi import Scapi
 
@@ -87,7 +92,7 @@ Scapi has 2 different methods to write a bot. One method is newer and clearer, b
             try:
                 message = Bot.recv_message(raw=True)
             
-                if message.startswith("!hello "):
+                if message.startswith("!hello"):
                     Bot.send_message(f"Hello, world!")
                         
             except: 
