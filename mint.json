@@ -36,6 +36,10 @@
       "pages": ["introduction", "history", "coreteam"]
     },
     {
+      "group": "Strawberry Chat",
+      "pages": ["stbchat/introduction"]
+    },
+    {
       "group": "SCAPI",
       "pages": ["scapi/introduction"]
     },
