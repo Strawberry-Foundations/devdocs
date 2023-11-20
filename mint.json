@@ -41,7 +41,7 @@
     },
     {
       "group": "Strawberry Chat",
-      "pages": ["stbchat/introduction"]
+      "pages": ["stbchat/introduction", "stbchat/stbm"]
     },
     {
       "group": "SCAPI",
