@@ -11,11 +11,11 @@ for Strawberry Chat.
 # Supported scapi versions in Strawberry Chat
 See this chart below
 
-|                     | v1.8.0 ![](https://img.shields.io/badge/OldStable-green)   | v1.8.1 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
-|---------------------|------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
-| Dev `v0.11.0`       |  ✅                                                        | ✅                                                     | ❌²                                                    |
-| Canary `v0.12.0`    |  ✅ (CM¹)                                                  | ✅ (CM¹)                                               | ✅                                                     | 
-| Canary `>=v0.12.1`  |  ✅ (CM)                                                   | ✅ (CM)                                                | ✅                                                     | 
+|                               | v1.8.0 - v1.8.1 ![](https://img.shields.io/badge/Legacy-green) | v1.8.2 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
+|-------------------------------|----------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
+| Legacy `(stbmv1)` `v1.0.0`    |  ✅                                                            | ✅                                                     | ❌²                                                    |
+| Canary `(stbmv2)` `v0.12.0`   |  ✅ (CM¹)                                                      | ✅ (CM¹)                                               | ✅                                                     | 
+| Canary `(stbmv2)` `>=v0.12.1` |  ✅ (CM³)                                                      | ✅ (CM³)                                               | ✅                                                     | 
 
 <Tip>
     ### Compatibility Mode (CM)
@@ -26,7 +26,15 @@ See this chart below
 
 <Warning>Manual configuration of the compatibility mode is currently only available for Scapi Canary v0.12.1.</Warning>
 
-**¹** Scapi Canary `v0.12.0` does not have manual configuration of the compatibility mode. You must change an argument in Scapi's source code for the configuration.
+**¹** Scapi Canary `v0.12.0 (stbmv2)` does not have manual configuration of the compatibility mode. You must change an argument in Scapi's source code for the configuration.
 We therefore recommend to always use the latest available version from our [Canary GitHub branch](https://github.com/Strawberry-Foundations/strawberry-chat/tree/json-communication)
 
-**²** Scapi Dev `v0.11.0` only supports the old, legacy communication system (v1.8.1 or lower). Using `v0.11.0` on a newer server (v1.9.0 or higher) will result in broken messages
+**²** Scapi Stable/Dev (Legacy) `v1.0.0/v0.11.0` only supports the old, legacy communication system `(stbmv1)` (*Server v1.8.1 or lower*).
+Using `v0.11.0` on a newer server (v1.9.0 or higher) will result in broken messages
+
+**³** To enable compatibility mode for Strawberry Chat, you need to change the assigned value for `json` to `False`.
+This could look like the following:
+```python
+Bot = Scapi.Bot(username=username, token=token, host=host, port=port, json=False)
+```
+[Find out more about the new communication system and how it works with Scapi](/scapi/usage#write-your-first-bot-canary-v0-12-0)
