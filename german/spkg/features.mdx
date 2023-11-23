@@ -1,0 +1,21 @@
+---
+title: Features
+description: Alles, was spkg machen kann (und vielleicht auch nicht)
+---
+
+# Synchronisierung
+Synchronisierung ist der Prozess wenn der Spkg Client die Server Datenbank empfängt, um eine Lokale Kopie der Paketdatenbank zu erstellen,
+um die Geschwindigkeit zu erhöhen. So muss nicht bei jeder Paketinstallation die Datenbank vom Server geholt werden. 
+
+<Warning>
+Aber Achtung: Das vergessen des Synchronisierung-Prozesses führt
+dazu, das du eine veraltete Datenbank hast, und somit installiert spkg damit auch alte Pakete. Wir empfehlen daher alle 2 - 3-mal Pro Woche die Datenbank zu aktualisieren.
+</Warning>
+
+Um die Lokale Datenbank zu synchronisieren, verwende folgenden Befehl:
+
+```bash
+spkg sync
+```
+
+Dies kann je nach größe der Datenbank eine bestimmte Zeit beanspruchen.
