@@ -92,6 +92,14 @@
         "german/stbchat/introduction",
         "german/stbchat/stbm"
       ]
+    },
+    {
+      "group": "SCAPI",
+      "pages": [
+        "german/scapi/introduction",
+        "german/scapi/usage",
+        "german/scapi/creations"
+      ]
     }
   ],
   "footerSocials": {
