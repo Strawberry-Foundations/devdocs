@@ -19,45 +19,71 @@
     {
       "name": "Our GitHub",
       "url": "https://github.com/Strawberry-Foundations/"
-    },
-    {
-      "name": "Visit our Website",
-      "url": "https://strawberryfoundations.xyz/"
     }
   ],
+  "topbarCtaButton": {
+    "name": "Visit our Website",
+    "url": "https://strawberryfoundations.xyz/"
+  },
   "tabs": [
     {
-      "name": "German documentation (Not working atm)",
+      "name": "German documentation",
       "url": "german"
     }
   ],
-  "anchors": [
-
-  ],
+  "anchors": [],
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "history", "coreteam"]
+      "pages": [
+        "introduction",
+        "history",
+        "coreteam"
+      ]
     },
     {
       "group": "Strawberry Chat",
-      "pages": ["stbchat/introduction", "stbchat/stbm"]
+      "pages": [
+        "stbchat/introduction",
+        "stbchat/stbm"
+      ]
     },
     {
       "group": "SCAPI",
-      "pages": ["scapi/introduction", "scapi/usage", "scapi/creations"]
+      "pages": [
+        "scapi/introduction",
+        "scapi/usage",
+        "scapi/creations"
+      ]
     },
     {
       "group": "spkg",
-      "pages": ["spkg/introduction", "spkg/usage", "spkg/features"]
+      "pages": [
+        "spkg/introduction",
+        "spkg/usage",
+        "spkg/features"
+      ]
     },
     {
       "group": "JSON Communication",
-      "pages": ["json-communication/introduction", "json-communication/implementing"]
+      "pages": [
+        "json-communication/introduction",
+        "json-communication/implementing"
+      ]
     },
     {
       "group": "archhelper",
-      "pages": ["archhelper/introduction"]
+      "pages": [
+        "archhelper/introduction"
+      ]
+    },
+
+    {
+      "group": "Einstieg",
+      "pages": [
+        "german/introduction",
+        "german/history"
+      ]
     }
   ],
   "footerSocials": {
