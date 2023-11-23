@@ -85,6 +85,13 @@
         "german/history",
         "german/coreteam"
       ]
+    },
+    {
+      "group": "Strawberry Chat",
+      "pages": [
+        "german/stbchat/introduction",
+        "german/stbchat/stbm"
+      ]
     }
   ],
   "footerSocials": {
