@@ -108,7 +108,21 @@
         "german/spkg/usage",
         "german/spkg/features"
       ]
+    },
+    {
+      "group": "JSON Kommunikation",
+      "pages": [
+        "german/json-communication/introduction",
+        "german/json-communication/implementing"
+      ]
+    },
+    {
+      "group": "archhelper",
+      "pages": [
+        "german/archhelper/introduction"
+      ]
     }
+
   ],
   "footerSocials": {
     "twitter": "https://twitter.com/strawberryfnds",
