@@ -1,0 +1,108 @@
+---
+title: Einführung in JSON Kommunikation
+description: Dies sollte dir eine allgemeine Vorstellung davon geben, worum es bei der JSON-Kommunikation geht
+---
+
+# Was? Wieso? Wie?
+Du wunderst dich vielleicht und fragst dich was das überhaupt ist? Naja, dies ist wie 2 Socket Instanzen miteinander Kommunizieren.
+Dies wurde ursprünglich für Strawberry Chat entwickelt um Daten zwischen Server und Client, wie zum Beispiel Nutzername, Badge und Nachrichten zu senden,
+aber wir haben uns dazu entschieden, ein kleines Tutorial zu geben wie du dieses System auch in deinem Client implementieren kannst!
+
+<Tip>JSON-Kommunikation (JSON-Communication) ist auch ein anderer Name für unser Strawberry Communication Standard v2 (`stbmv2`). [Hier](/german/stbchat/stbm) kannst du mehr darüber erfahren</Tip>
+
+# Die Idee
+Das originale Konzept dafür wurde auf unserem Projekteboard auf GitHub [GitHub](https://github.com/orgs/Strawberry-Foundations/projects/1?pane=issue&itemId=44311144) am 10. November 2023 gepostet.
+Beachte das dies aktuell nur in Deutsch zur Verfügung steht. 
+
+# Beispielcode
+
+<Info>Dies ist ein sehr einfaches Beispiel für JSON-Kommunikation welches in Strawberry Chat verwendet wird</Info>
+
+<CodeGroup>
+
+    ```json JSON
+    {
+        "message_type": "user_message", // Typ der Nachricht, meist user_message
+        "username": "julian", // Der Nutzername sollte komplett kleingeschrieben werden und ohne Leerzeichen
+        "nickname": "Julian The Great", // Der Nickname kann jede Art von UTF-8 Zeichen sowie Leerzeichen beinhalten
+        "badge": "👑", // Emoji
+        "role_color": "\u001b[31m\u001b[1m", // Dieses verwendet ANSI Farben, das Beispiel hier zeigt ein Rot mit Bold
+        "message": {
+            "content": "Hello World!"
+        }
+    }
+    ```
+
+    ```python Python
+    # Receive code of the client
+    def receive(sock):
+        while threadFlag:
+            try:
+                message = sock.recv(2048).decode('utf-8')
+
+                try: message = conv_json_data(message)
+                except: message = message
+
+                if message:
+                    try:
+                        try: message_type = message["message_type"]
+                        except: message_type = "unknown"
+
+                        if message_type == "user_message":
+                        username    = message["username"]
+                        nickname    = message["nickname"]
+                        badge       = badge_handler(message["badge"])
+                        role_color  = message["role_color"]
+                        message     = message["message"]["content"]
+
+                        if nickname == username:
+                            fmt = f"[{current_time()}] {role_color}{username}{badge}:{CRESET} {message}"
+                        else:
+                            fmt = f"[{current_time()}] {role_color}{nickname} (@{username.lower()}){badge}:{CRESET} {message}"
+
+                        print(fmt)
+
+                    else:
+                        message     = message["message"]["content"]
+                        print(f"[{current_time()}] {message}")
+
+                except Exception as e:
+                    time.sleep(0.05)
+                    message         = message["message"]["content"]
+                    print(f"[{current_time()}] {message}")
+
+            else: break
+
+        except Exception as e:
+            if experimental_debug_mode: print(f"{Fore.RED + BOLD}{Str[lang]['ConnectionInterrupt']}{Fore.RESET + CRESET}")
+    pass
+    ```
+
+</CodeGroup>
+
+# Unterstützte Versionen in Strawberry Chat
+
+<Warning>
+    Dies gilt nur für Strawberry Chat, kein anderes Programm
+</Warning>
+
+Siehe Tabelle
+
+
+
+|                     | v1.8.0 - v1.8.1 ![](https://img.shields.io/badge/Legacy-green) | v1.8.2 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
+|---------------------|----------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
+| Standard `<=2.4.0`  | ✅                                                            | ✅                                                      | ✅                                                    | 
+| Standard `v2.5.0`   | ❌                                                            | ❌                                                      | ❌                                                    | 
+| Standard `>=v2.5.1` | ✅ (CM)                                                       | ✅ (CM)                                                 | ✅ (CM)                                               | 
+| Lite `<=v1.0.1`     | ✅                                                            | ✅                                                      | ✅                                                    | 
+| Lite `>=v1.1.0`     | ❌                                                            | ❌                                                      | ❌                                                    | 
+| Nano `<=v1.0.1`     | ✅                                                            | ✅                                                      | ✅                                                    | 
+| Nano `>=v1.1.0`     | ❌                                                            | ❌                                                      | ❌                                                    | 
+| Berryjuice-pico     | ✅                                                            | ✅                                                      | ✅                                                    | 
+
+<Tip>
+    ### Kompatiblitätsmodus (CM)
+    Seit Client Canary v2.5.1 haben wir ein Feature hinzugefügt welches Nutzern erlaubt, sich mit alten Servern zu verbinden.
+    Dies heißt Kompatiblitätsmodus. Um den Kompatiblitätsmodus zu aktivieren musst du entweder `compatibility_mode: true` zu deinem Legacy Servereintrag hinzufügen oder starte den Client mit dem `--compatibility-mode` Argument
+</Tip>
