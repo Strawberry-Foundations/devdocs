@@ -1,0 +1,49 @@
+---
+title: Einführung in Scapi
+description: Was ist SCAPI?
+---
+
+# Was ist SCAPI?
+
+SCAPI (Strawberry Chat API) ist die API für, wie du wahrscheinlich schon vermutet hast, Strawberry Chat. 
+Es ermöglicht Entwickler benutzerdefinierte Bots für Strawberry Chat zu erstellen.
+
+Die Eigenschreibweise von **SCAPI** unterscheidet sich nicht wirklich. Für unser Internes Versionssystem verwenden wir die kleinschreibweise von SCAPI, also `scapi`.
+Für formale Textüberschriften wird meist die kapitalisierte Variante, `SCAPI` verwendet. Ansonsten zumindest im Deutschen verwendet man die Grundrechtschreibung und schreibt den 
+ersten Buchstaben groß. 
+
+# Unterstützte Versionen in Strawberry Chat
+Als erstes solltest du dir bewusst sein das Strawberry Chat ab Version 1.9.0 ein neues Kommunizierungssystem benutzt.
+Unser Interner Name dafür ist `stbm` oder auch der Strawberry Kommunizierungsstandard. 
+
+[Hier kannst du mehr über das Strawberry Kommunizierungsstandard erfahren](/german/stbchat/stbm) 
+
+Die unterstützten Versionen findest du in der folgenden Tabelle:
+ 
+|                               | v1.8.0 - v1.8.1 ![](https://img.shields.io/badge/Legacy-green) | v1.8.2 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
+|-------------------------------|----------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
+| Legacy `(stbmv1)` `v1.0.0`    |  ✅                                                            | ✅                                                     | ❌²                                                    |
+| Canary `(stbmv2)` `v0.12.0`   |  ✅ (CM¹)                                                      | ✅ (CM¹)                                               | ✅                                                     | 
+| Canary `(stbmv2)` `>=v0.12.1` |  ✅ (CM³)                                                      | ✅ (CM³)                                               | ✅                                                     | 
+
+<Tip>
+    ### Kompatiblitätsmodus (CM)
+    Seit Scapi Canary v0.12.0 wir haben ein Feature hinzugefügt, welches Bots erlaubt sich mit alten Servern zu verbinden.
+    Dies wird Kompatibilitätsmodus genannt.
+    [Erfahre mehr](/german/json-communication/introduction)
+</Tip>
+
+<Warning>Manuelle Konfiguration für den Kompatibilitätsmodus ist aktuell nur für Scapi Canary v0.12.1 oder höher verfügbar.</Warning>
+
+**¹** Scapi Canary `v0.12.0 (stbmv2)` hat keine manuelle Konfiguration für den Kompatibilitätsmodus. Für das Umstellen zum Kompatibilitätsmodus musst du ein Argument in Scapi's Source Code verändern.
+Wir raten davon ab und empfehlen das du immer die letzte Version von unserem [Canary GitHub Branch](https://github.com/Strawberry-Foundations/strawberry-chat/tree/json-communication) verwendest.
+
+**²** Scapi Stable/Dev (Legacy) `v1.0.0/v0.11.0` unterstützt nur alte Server, also das alte, Legacy Kommunizierungssystem`(stbmv1)` (*Server v1.8.1 oder niedriger*).
+Die Verwendung von `v0.11.0` auf einem neuen Server (v1.9.0 oder höher) wird dazu führen das Nachrichten nicht richtig angezeigt werden.
+
+**³** Um den Kompatibilitätsmodus für Strawberry Chat zu aktivieren, musst zu zuerst den zugewiesenen Wert für `json` zu `False` ändern.
+Dies könnte folgendermaßen aussehen:
+```python
+Bot = Scapi.Bot(username=username, token=token, host=host, port=port, json=False)
+```
+[Erfahre mehr über das neue Kommunizierungssystem und sehe wie es mit Scapi funktioniert](/scapi/usage#write-your-first-bot-canary-v0-12-0-for-stbmv2)
