@@ -1,0 +1,86 @@
+---
+title: Verwendung
+description: Wie du spkg verwendest
+---
+
+# Erhalten von spkg
+
+Du kannst spkg auf unserem GitHub herunterladen
+
+# Grundlegende Verwendung
+
+Die Verwendung von spkg ist relativ einfach, du kannst einen Befehl aufrufen und Argumente hinzufügen, wie zum Beispiel:
+
+<Tip>Du kannst auch spkg's eingebaute Hilfe verwenden, indem du `spkg help` ausführst.</Tip>
+
+```bash
+spkg install gba-driver
+```
+
+# Hilfe
+
+Dies ist der Hilfe-Dialog, der spkg dir ausgeben wird.
+
+```
+Advanced Source Package Managment (spkg) 2.0.0beta1 (20231012) aarch64
+W: Dies ist eine Entwicklungsversion von spkg!
+
+Aufruf: spkg [Befehl] <Argument>
+
+spkg ist ein Paketmanager, der den Quellcode des gewünschten
+Paketes (meist) von den offiziellen Quellen herunterlädt,
+und diesen dann für dein Gerät kompiliert.
+Das Ziel von spkg ist, einfach und auch ohne viel Erfahrung die
+neusten offiziellen Versionen von Programmen zu erhalten, auch
+unter Distrobutionen die nicht die neuste Version anbieten.
+Durch das kompilieren des Paketes ist das Programm für dein Gerät
+optimiert und läuft dementsprechend optimierter.
+
+Befehle:
+ -> install: Installiert ein Pakete
+ -> remove: Entfernt ein Pakete
+ -> reinstall: Installiert ein Pakete neu
+ -> update: Überprüft auf Paketaktualisierungen
+ -> upgrade: Aktualisiert ein Paket
+ -> sync: Synchronisiert die Paketdatenbanken
+ -> info: Gibt dir Informationen über ein Paket aus
+ -> list: Zählt verfügbare Pakete auf
+ -> download: Lädt ein Paket herunter
+ -> build: Baut verschiedene Dinge *^____^*
+    -> world: Baut die lokale World-Datenbank von neu auf
+ -> plugins: Plugin Verwaltung
+    -> list: Zählt alle installierten Plugins auf
+    -> exec: Führt einen Befehl eines Plugins aus
+    -> enable: Aktiviert ein Plugin
+    -> disable: Deaktiviert ein Plugin
+    -> market: Plugin Marketplace
+       -> list: Zählt verfügbare Plugins auf
+    -> get: Installiert ein Plugin
+ -> config: Konfigurationsverwaltung
+    -> language: Sprachkonfigurierung
+
+Copyright (C) 2023 Juliandev02 @ Strawberry Foundations - Made with <3
+```
+
+# Installieren eines Paketes
+
+Du kannst ein Paket installieren, indem du folgenden Befehl verwendest:
+
+```bash
+spkg install [Paketgruppe]/<Paketname>
+```
+
+`Paketgruppe` ist Optional, wenn es mehrere Pakete mit demselben Namen geben soll, verwende bitte `Paketgruppe`
+
+Ersetze `<packagename>` mit dem Paket welches du installieren willst, z.B. `htop`, `libbismuth-git` oder `python3.12`.
+
+# Deinstallieren eines Paketes
+
+Das Deinstallieren eines Paketes ist ziemlich identisch zum Installieren, führe einfach den selben Befehl aus den du zum installieren verwendet hast,
+ersetze aber `install` mit `uninstall`, Beispielsweise:
+
+```bash
+spkg remove [Paketgruppe]/<Paketname>
+```
+
+Paketgruppen gelten auch für das Entfernen von Paketen.
