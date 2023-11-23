@@ -1,0 +1,236 @@
+---
+title: Verwendung
+description: Wie man SCAPI verwendet
+---
+
+# Scapi holen
+Unsere Scapi Hauptdatei kann [hier](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/bot/scapi.py) gefunden werden.
+Platziere diese Datei einfach in dem Ordner, wo du den Bot programmieren willst. Du kannst herausfinden wie du Scapi in deinem Code einbinden kannst indem du dir den Code unten anschaust.
+
+Wir empfehlen dir das du außerdem mal einen Blick in unserem [Scapi Bot Ordner](https://github.com/Strawberry-Foundations/strawberry-chat/tree/main/bot) verschaffst um zu verstehen wie ein Bot aufgebaut ist und funktioniert.
+
+# Verwendung von scapi in deinem Code
+Scapi wird mit jedem Update einfacher. Um Scapi in deinem Code einzubinden, verwende Python's `import` Statement.
+```python
+import scapi            # Importiere die Scapi Funktionsdate
+from scapi import Scapi # Importiere Scapi's Bot Klasse
+```
+
+<Tip>Wir empfehlen YAML für die Konfigurationsdateien zu verwenden. Du kannst YAML mithilfe von `pip` installieren. (`pip install pyyaml`)</Tip>
+
+# Schreibe deinen ersten Bot (Stable v1.0.0 für [stbmv1](/german/stbchat/stbm))
+<Warning>Dieser Dokumentationsteil gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
+
+Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
+
+Die andere Methode ist die Originale. Diese ist etwas mehr schwierig, kann aber mehr angepasst werden. Diese Methode wird weiterhin für reine `on_message`
+Events verwendet um reine Nachrichten zu akzeptieren & zu verarbeiten.
+Diese Methode heißt `Original`.
+
+<Tip>Wir empfehlen die Verwendung der Commands Methode da diese mehr Features besitzt & mehr Support bietet als die Originale Methode (z.B. Berechtigungen)</Tip>
+
+<CodeGroup>
+    ```python Command Methode
+    import scapi                # Dies importiert Scapi
+    from scapi import Scapi
+
+    import yaml                 # Importiere YAML für die Konfiguration
+    from yaml import SafeLoader
+
+    with open("default.yml", encoding="utf-8") as config_file:
+        config = yaml.load(config_file, Loader=SafeLoader) # Lade die Konfigurationsdatei
+
+    # Definiere einige wichtige Variablen für die Reibungslose Verwendung des Bots
+    username    = config["bot"]["username"]     
+    token       = config["bot"]["token"]
+    host        = config["server"]["host"]
+    port        = config["server"]["port"]
+    prefix      = config["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port) # Definiere den Bot
+    Bot.login() # Anmelden ins System
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True) # Setze ein paar nützliche Flags
+
+    Bot.permission_handler(custom_list=["your_name"], owner="your_name") # Verwalte deine Bot Berechtigungen
+
+    # Standard Bot Command
+    @Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+    def test_command(username: str, args: list):
+        Bot.send_message(f"""
+            Username: {username}
+            Args: {args}"""
+            )
+    
+    # Bot on_ready Event
+    @Bot.event
+    def on_ready():
+        print(f"{Bot.log_msg}{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}")
+    
+    # Starte den Bot
+    Bot.run(on_ready)
+    ```
+
+    ```python Originale Methode
+    import scapi
+    from scapi import Scapi
+
+    import yaml
+    from yaml import SafeLoader
+    import threading
+
+    with open("default.yml", encoding="utf-8") as config:
+        conf = yaml.load(config, Loader=SafeLoader)
+
+    username    = conf["bot"]["username"]
+    token       = conf["bot"]["token"]
+    host        = conf["server"]["host"]
+    port        = conf["server"]["port"]
+    prefix      = conf["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port)
+    Bot.login()
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+
+
+    def Commands():
+        while True:
+            try:
+                message = Bot.recv_message(raw=True)
+            
+                if message.startswith("!hello"):
+                    Bot.send_message(f"Hello, world!")
+                        
+            except: 
+                Bot.logger(f"{scapi.RED}An unknown exception occured{scapi.RESET}", type=Scapi.LogLevel.ERROR)
+                break
+
+
+    @Bot.event
+    def on_ready():
+        print(f"{Bot.log_msg}{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}")
+        
+    BotThread = threading.Thread(target=Bot.run, args=(on_ready,))
+    CommandThread = threading.Thread(target=Commands)
+
+    BotThread.start()
+    CommandThread.start()
+    ```
+
+</CodeGroup>
+
+Dies ist ein Beispiel wie eine Konfiguration in YAML aussehen könnte:
+
+```yaml
+bot:
+  id: 12345678
+  username: "username"
+  token: "token"
+  prefix: "!"
+
+server:
+  host: "1.2.3.4"
+  port: 1234
+
+flags:
+  enableUserInput: true
+  printReceivedMessagesToTerminal: true
+```
+
+----
+# Schreibe deinen ersten Bot  (Canary >=v0.12.0 für [stbmv2](/stbchat/stbm))
+<Warning>Dieser Dokumentationsteil gilt nur für Scapi Canary v0.12.0 (stbmv2) oder höher</Warning>
+
+<Warning>Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#schreibe-deinen-ersten-bot-stable-v1-0-0-fuer-stbmv1) wurde seit Scapi Canary v0.12.1 abgeschafft. Allerdings planen wir aktuell eine verbesserte Version der Originalen Methode</Warning>
+
+Scapi Canary ist aktuell in einer Instabilen Entwicklungsphase und wird daher auch aktiv aktualisiert.
+Du kannst Scapi Canary (`@json-communication`) [hier](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/json-communication/bot/scapi.py) erhalten.
+Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Canary erstellen kannst.
+
+<CodeGroup>
+    ```python Command Methode
+    import scapi
+    from scapi import Scapi
+
+    import yaml
+    from yaml import SafeLoader
+
+    with open("default.yml", encoding="utf-8") as config_file:
+        config = yaml.load(config_file, Loader=SafeLoader)
+
+    username    = config["bot"]["username"]
+    token       = config["bot"]["token"]
+    host        = config["server"]["host"]
+    port        = config["server"]["port"]
+    prefix      = config["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port, json=True)
+    Bot.login()
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+
+    Bot.permission_handler(custom_list=["julian"], owner="julian")
+
+    @Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+    def test_command(username: str, args: list):
+        Bot.send_message(f"""
+            Username: {username}
+            Args: {args}"""
+            )
+
+    @Bot.event
+    def on_ready():
+        Bot.logger(f"{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}", type=Scapi.LogLevel.INFO)
+        
+    Bot.run(on_ready)
+    ```
+
+    ```python Originale Methode (Veraltet seit v0.12.1)
+    # WARNUNG: Diese Methode ist veraltet
+    # WIR ARBEITEN AN EINER BESSEREN VERSION DIESER METHODE
+
+    import scapi
+    from scapi import Scapi
+
+    import yaml
+    from yaml import SafeLoader
+    import threading
+
+    with open("default.yml", encoding="utf-8") as config:
+        conf = yaml.load(config, Loader=SafeLoader)
+
+    username    = conf["bot"]["username"]
+    token       = conf["bot"]["token"]
+    host        = conf["server"]["host"]
+    port        = conf["server"]["port"]
+    prefix      = conf["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port)
+    Bot.login()
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+
+
+    def Commands():
+        while True:
+            try:
+                message = Bot.recv_message(raw=True)
+            
+                if message.startswith("!hello"):
+                    Bot.send_message(f"Hello, world!")
+                        
+            except: 
+                Bot.logger(f"{scapi.RED}An unknown exception occured{scapi.RESET}", type=Scapi.LogLevel.ERROR)
+                break
+
+
+    @Bot.event
+    def on_ready():
+        print(f"{Bot.log_msg}{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}")
+        
+    BotThread = threading.Thread(target=Bot.run, args=(on_ready,))
+    CommandThread = threading.Thread(target=Commands)
+
+    BotThread.start()
+    CommandThread.start()
+    ```
+</CodeGroup>
+
+Das Ändern des zugewiesenen Wertes von `json` zu `False` aktiviert den Kompatiblitätsmodus. Beachte das dies noch nicht vollständig entwickelt wurde.
