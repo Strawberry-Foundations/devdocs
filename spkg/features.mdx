@@ -5,7 +5,12 @@ description: Everything that spkg can do
 
 # Syncing
 Syncing is the process where the spkg client retrives the server database in order to make a local copy of that database
-to speed up things.
+to speed up things. This means that the database does not have to be retrieved from the server every time a package is installed.
+
+<Warning>
+But beware: Forgetting the synchronization process will result in
+you will have an outdated database, which means that spkg will also install old packages. We therefore recommend updating the database every 2 - 3 times a week.
+</Warning>
 
 To sync the repository database with the local database, use
 
