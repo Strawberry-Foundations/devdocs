@@ -45,7 +45,8 @@
       "group": "Strawberry Chat",
       "pages": [
         "stbchat/introduction",
-        "stbchat/stbm"
+        "stbchat/stbm",
+        "stbchat/community"
       ]
     },
     {
@@ -90,7 +91,8 @@
       "group": "Strawberry Chat",
       "pages": [
         "german/stbchat/introduction",
-        "german/stbchat/stbm"
+        "german/stbchat/stbm",
+        "german/stbchat/community"
       ]
     },
     {
