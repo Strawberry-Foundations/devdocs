@@ -19,13 +19,29 @@ from scapi import Scapi # Importiere Scapi's Bot Klasse
 <Tip>Wir empfehlen YAML für die Konfigurationsdateien zu verwenden. Du kannst YAML mithilfe von `pip` installieren. (`pip install pyyaml`)</Tip>
 
 # Schreibe deinen ersten Bot ([stbmv1](/german/stbchat/stbm))
-<Warning>Dieser Dokumentationsteil gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
+<Warning>Dieser Dokumentationsteil gilt nur für Scapi Legacy v1.0.0 (stbmv1) oder höher</Warning>
 
 ### Die ersten Schritte
 Um die Basics deines Bots aufzubauen, benötigst du ein Bot-Objekt. Dieses kannst du mithilfe unserer Bot-Objektklasse erstellen:
 ```python
 Bot = Scapi.Bot(username="username", token="bottoken", host="1.2.3.4", port=1234)
 ```
+
+In dieser Tabelle siehst du alle verfügbaren Argumente mit ihrer Bedeutung
+| Flag                      | Erklärung |
+|---------------------------|-----------|
+| `username`                | Der Nutzername des Bots | 
+| `token`                   | Der Token (Passwort) des Bots | 
+| `host`                    | Remote-Server, wo der Bot sich mit verbinden soll | 
+| `port`                    | Der Port des Remote-Servers | 
+| `enable_user_input`       | Aktiviere die Nachrichteneingabe innerhalb der Konsole (Auch als Flag verfügbar) | 
+| `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) (Auch als Flag verfügbar) | 
+
+Damit der Bot sich im Server auch einloggt, musst du noch eine wichtige Funktion hinzufügen
+```python
+Bot.login()
+```
+
 
 ### Flags
 Flags sind ein wichtiger Teil beim Programmieren deines Scapi-Bots.
@@ -35,6 +51,13 @@ Die Definierung deiner Flags könnte so aussehen:
 ```python
 Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
 ```
+
+In dieser Tabelle siehst du alle verfügbaren Flags mit ihrer Bedeutung
+| Flag                      | Erklärung |
+|---------------------------|-----------|
+| `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) | 
+| `enable_user_input`       | Aktiviere die Nachrichteneingabe innerhalb der Konsole | 
+| `log_msg`                 | Ändere das Format der Log-Nachrichten | 
 
 ### Berechtigungen
 Ein weiterer Teil deines Bots sind Berechtigungen. Diese überprüfen ob der Nutzer, der einen Command ausgeführt hat, auch die nötigen Berechtigungen besitzt.
@@ -145,8 +168,8 @@ Um den Bot zu starten musst du zuerst darauf achten, welche Command Methode du v
 </CodeGroup>
 
 
-### Beispielbot (Stable v1.0.0)
-<Warning>Dieser Beispielbot gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
+### Beispielbot (Stable v1.0)
+<Warning>Dieser Beispielbot gilt nur für Scapi Legacy v1.0.0 (stbmv1)</Warning>
 
 <CodeGroup>
     ```python Command Methode
@@ -256,16 +279,169 @@ flags:
 ```
 
 ----
-# Schreibe deinen ersten Bot  (Canary >=v0.12.0 für [stbmv2](/stbchat/stbm))
+# Schreibe deinen ersten Bot ([stbmv2](/german/stbchat/stbm))
 <Warning>Dieser Dokumentationsteil gilt nur für Scapi Canary v0.12.0 (stbmv2) oder höher</Warning>
 
+### Die ersten Schritte
+Um die Basics deines Bots aufzubauen, benötigst du ein Bot-Objekt. Dieses kannst du mithilfe unserer Bot-Objektklasse erstellen:
+```python
+Bot = Scapi.Bot(username="username", token="bottoken", host="1.2.3.4", port=1234)
+```
+
+In dieser Tabelle siehst du alle verfügbaren Argumente mit ihrer Bedeutung
+| Flag                      | Erklärung |
+|---------------------------|-----------|
+| `username`                | Der Nutzername des Bots | 
+| `token`                   | Der Token (Passwort) des Bots | 
+| `host`                    | Remote-Server, wo der Bot sich mit verbinden soll | 
+| `port`                    | Der Port des Remote-Servers | 
+| `enable_user_input`       | Aktiviere die Nachrichteneingabe innerhalb der Konsole (Auch als Flag verfügbar) | 
+| `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) (Auch als Flag verfügbar) | 
+| `json`                    | Aktiviert oder deaktiviert den Kompatiblitätsmodus für alte Server | 
+
+<Warning>Das Argument `json` ist erst seit Scapi Canary v0.12.1 verfügbar</Warning>
+
+
+Damit der Bot sich im Server auch einloggt, musst du noch eine wichtige Funktion hinzufügen
+```python
+Bot.login()
+```
+
+### Flags
+Flags sind ein wichtiger Teil beim Programmieren deines Scapi-Bots.
+Du benötigst Flags um z.B. festzulegen ob du Nachrichten von Nutzern in deinen Bot-Logs sehen willst, oder ob du die Nachrichteneingabe innerhalb der Konsole aktivieren willst.
+Die Definierung deiner Flags könnte so aussehen:
+
+```python
+Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+```
+
+In dieser Tabelle siehst du alle verfügbaren Flags mit ihrer Bedeutung
+| Flag                      | Erklärung |
+|---------------------------|-----------|
+| `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) | 
+| `enable_user_input`       | Aktiviere die Nachrichteneingabe innerhalb der Konsole | 
+| `log_msg`                 | Ändere das Format der Log-Nachrichten | 
+| `ignore_capitalization`   | Aktiviert oder deaktiviert das ignorieren von Großbuchstaben für die `on_message` Methode (**Nur verfügbar ab Scapi Canary v0.13**) | 
+
+### Berechtigungen
+Ein weiterer Teil deines Bots sind Berechtigungen. Diese überprüfen ob der Nutzer, der einen Command ausgeführt hat, auch die nötigen Berechtigungen besitzt.
+Außerdem kannst du auch festlegen, wer der Bot-Owner ist.
+In Scapi gibt es eine Funktion, welche benutzerdefinierte Werte für die Berechtigungsverwaltung annimmt. Mithilfe dieser Funktion kannst du den Bot-Owner festlegen,
+oder eine Custom-Liste erstellen, und diese anschließend auch innerhalb von Commands verwenden.
+Das festlegen des Owners und einer Custom-Liste kann wie folgt vorgenommen werden:
+
+```python
+Bot.permission_handler(custom_list=["julian"], owner="julian")
+```
+
+### Commands (Commands Modul)
+Damit der Bot auch ein Sinn und Zweck hat, braucht der Bot Commands. Ein einfacher Commands sieht wie folgt aus: 
+
+<Info>
+    Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
+    Dieser Teil erklärt wie du einen Command mithilfe des Command-Modules schreiben kannst. 
+
+    Die ältere Methode ist seit Scapi Canary v0.12.1 veraltet und sollte daher auch nicht mehr verwendet werden
+</Info>
+
+```python
+@Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+def test_command(username: str, args: list):
+    Bot.send_message(f"""
+        Username: {username}
+        Args: {args}"""
+        )
+```
+
+Um klarzustellen, wofür was steht, ist hier nun eine detalierte Erklärung:
+
+| Code                      | Erklärung |
+|---------------------------|-----------|
+| `name`                    | Steht für den Command-Namen, welcher anschließend in der Registry eingefügt wird. Du kannst den Command dann mithilfe des Prefixes und dann den Namen aufrufen (z.B. `!test`) | 
+| `arg_count`               | Anzahl der Argumente, die der Befehl annimmt und mindestens benötigt. Es kann auch eine niedrigere Zahl angegeben werden und mehr Argumente trotzdem angenommen werden | 
+| `required_permissions`    | Benötigte Berechtigung für den Command. Hier muss ein Wert der Scapi-Klasse übergeben werden. `Scapi.Bot.PermissionLevel.CUSTOM` für die Custom-Liste, die du [hier](german/scapi/usage#berechtigungen) definiert hast | 
+| `username`                | Der Nutzername, des Benutzers, der den Command ausgeführt hat | 
+| `args`                    | Die Argumente, die beim Ausführen des Commands übergeben wurden. Wird in einer Liste gespeichert (`["first", "second", "third"]`) | 
+| `send_message(...)`       | Funktion um eine Nachricht zu senden | 
+
+
+### Commands (Originale Methode)
 <Warning>
-    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#schreibe-deinen-ersten-bot-stable-v1-0-0-fuer-stbmv1) wurde seit Scapi Canary v0.12.1 abgeschafft.
+    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#commands-originale-methode) wurde seit Scapi Canary v0.12.1 abgeschafft.
     
     Zur Weiterverwendung der Originalen Methode empfehlen wir die neue `@on_message` Methode (Seit v0.13). Bei fehlender Funktionalität bitte ein [Issue](https://github.com/Strawberry-Foundations/strawberry-chat/issues) auf unserem [GitHub](https://github.com/Strawberry-Foundations/strawberry-chat/) öffnen
+
+    Falls du trotzdem aus was auch immer welchen Gründen diese Methode verwenden möchtest, schaue dir bitte [diesen](/german/scapi/usage#commands-originale-methode) Teil der Dokumentation an
 </Warning>
 
-Scapi Canary ist aktuell in einer Instabilen Entwicklungsphase und wird daher auch aktiv aktualisiert.
+### Events
+Es gibt bestimmte Events, die der Bot bei etwas bestimmten aufrufen kann. 
+
+#### @on_message Event
+Ab Scapi v0.13 haben wir eine verbesserte Version der Originalen Message-Methode hinzugefügt. Diese verwendet unseren modernen Python-Standard und Python-Dekoratoren.
+Die Implementierung in deinem Bot-Code ist sehr einfach. Du benötigst nur mindestens Scapi v0.13 oder höher.
+Ein Bot-Message-Event kann so aussehen: 
+
+```python
+# Python-Dekorator zum definieren des Nachrichtenevents
+@Bot.on_message(message="Hello")
+# Definierung der Funktion, um sie nachher automatisch auszuführen
+def on_hello_message(username: str): 
+    # Der Code der Funktion, also das was ausgeführt werden soll [...]
+    Bot.send_message(f"Hello {username}!") 
+```
+
+<Warning>
+    Nicht alle Funktionen der alten Originalen Methode konnten übernommen werden, daher ist die `@on_message` Methode mehr eingeschränkt.
+
+    Folgende Funktionen konnten bis jetzt nicht implementiert werden (Aber könnten in Zukunft in einer anderen Form auftreten):
+    - Nutzung von .startswith()
+    - Das erkennen von spezifischen Wörtern innerhalb der Nachricht
+
+    **Dieses Feature dient aktuell nur dazu, um z.B. ein normales Wort eines Nutzers zu verarbeiten, und darauf zu antworten.**
+</Warning>
+
+
+#### @on_ready Event
+Dieses Event wird aufgerufen, wenn du den Bot startest. Du musst nur bei der `Bot.run()` Funktion als Argument die `on_ready` Funktion übergeben.
+Ein `on_ready` Event kann so aussehen:
+```python
+@Bot.event
+def on_ready():
+    Bot.logger(
+            f"{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}",
+            type=Scapi.LogLevel.INFO
+            )
+```
+
+### Den Bot starten 
+Um den Bot zu starten musst du zuerst darauf achten, welche Command Methode du verwendest.
+
+<CodeGroup>
+    ```python @commands
+    Bot.run(on_ready)
+    ```
+
+    ```python Originale Methode
+    BotThread = threading.Thread(target=Bot.run, args=(on_ready,))
+    CommandThread = threading.Thread(target=Commands)
+
+    BotThread.start()
+    CommandThread.start()
+    ```
+</CodeGroup>
+
+
+### Beispielbot (Canary v0.12.0 oder höher)
+<Warning>Dieser Beispielbot gilt nur für Scapi Canary v0.12.0 (stbmv2) oder höher</Warning>
+
+<Warning>
+    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#commands-originale-methode) wurde seit Scapi Canary v0.12.1 abgeschafft.
+    Du kannst [hier](/german/scapi/usage#commands-originale-methode-2) mehr darüber lesen
+</Warning>
+
+Scapi Canary ist aktuell in einer Entwicklungsphase und wird daher auch aktiv aktualisiert.
 Du kannst Scapi Canary (`@json-communication`) [hier](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/json-communication/bot/scapi.py) erhalten.
 Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Canary erstellen kannst.
 
@@ -400,27 +576,3 @@ Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Canar
 </CodeGroup>
 
 Das Ändern des zugewiesenen Wertes von `json` zu `False` aktiviert den Kompatiblitätsmodus. Beachte das dies noch nicht vollständig entwickelt wurde.
-
-### @on_message Events
-Ab Scapi v0.13 haben wir eine verbesserte Version der Originalen Message-Methode hinzugefügt. Diese verwendet unseren modernen Python-Standard und Python-Dekoratoren.
-Die Implementierung in deinem Bot-Code ist sehr einfach. Du benötigst nur mindestens Scapi v0.13 oder höher.
-Ein Bot-Message-Event kann so aussehen: 
-
-```python
-# Python-Dekorator zum definieren des Nachrichtenevents
-@Bot.on_message(message="Hello")
-# Definierung der Funktion, um sie nachher automatisch auszuführen
-def on_hello_message(username: str): 
-    # Der Code der Funktion, also das was ausgeführt werden soll [...]
-    Bot.send_message(f"Hello {username}!") 
-```
-
-<Warning>
-    Nicht alle Funktionen der alten Originalen Methode konnten übernommen werden, daher ist die `@on_message` Methode mehr eingeschränkt.
-
-    Folgende Funktionen konnten bis jetzt nicht implementiert werden (Aber könnten in Zukunft in einer anderen Form auftreten):
-    - Nutzung von .startswith()
-    - Das erkennen von spezifischen Wörtern innerhalb der Nachricht
-
-    **Dieses Feature dient aktuell nur dazu, um z.B. ein normales Wort eines Nutzers zu verarbeiten, und darauf zu antworten.**
-</Warning>
