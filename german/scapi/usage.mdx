@@ -147,7 +147,7 @@ Du kannst Scapi Canary (`@json-communication`) [hier](https://raw.githubusercont
 Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Canary erstellen kannst.
 
 <CodeGroup>
-    ```python Command Methode
+    ```python @commands
     import scapi
     from scapi import Scapi
 
@@ -182,6 +182,49 @@ Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Canar
         
     Bot.run(on_ready)
     ```
+
+    ```python @commands + @on_message (seit v0.13)
+    import scapi
+    from scapi import Scapi
+
+    import yaml
+    from yaml import SafeLoader
+
+    with open("default.yml", encoding="utf-8") as config_file:
+        config = yaml.load(config_file, Loader=SafeLoader)
+
+    username    = config["bot"]["username"]
+    token       = config["bot"]["token"]
+    host        = config["server"]["host"]
+    port        = config["server"]["port"]
+    prefix      = config["bot"]["prefix"]
+
+    Bot = Scapi.Bot(username=username, token=token, host=host, port=port, json=True)
+    Bot.login()
+    Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+
+    Bot.permission_handler(custom_list=["julian"], owner="julian")
+
+    # Neue on_message Methode, um "Plain" Nachrichten vom Nutzer zu verarbeiten
+    @Bot.on_message(message="Hello")
+    def on_hello_message(username: str):
+        Bot.send_message(f"Hello {username}!")    
+
+    # Commands Methode
+    @Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+    def test_command(username: str, args: list):
+        Bot.send_message(f"""
+            Username: {username}
+            Args: {args}"""
+            )
+
+    @Bot.event
+    def on_ready():
+        Bot.logger(f"{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}", type=Scapi.LogLevel.INFO)
+        
+    Bot.run(on_ready)
+    ```
+
 
     ```python Originale Methode (Veraltet seit v0.12.1)
     # WARNUNG: Diese Methode ist veraltet
