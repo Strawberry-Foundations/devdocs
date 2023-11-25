@@ -52,7 +52,9 @@ Damit der Bot auch ein Sinn und Zweck hat, braucht der Bot Commands. Ein einfach
 
 <Info>
     Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
-    Dieser Teil erklärt wie du einen Command mithilfe des Command-Modules schreiben kannst
+    Dieser Teil erklärt wie du einen Command mithilfe des Command-Modules schreiben kannst. 
+
+    Für die andere Methode kannst du dir [diesen](/german/scapi/usage#commands-originale-methode) Dokumentationsteil anschauen
 </Info>
 
 ```python
@@ -75,16 +77,46 @@ Um klarzustellen, wofür was steht, ist hier nun eine detalierte Erklärung:
 | `args`                    | Die Argumente, die beim Ausführen des Commands übergeben wurden. Wird in einer Liste gespeichert (`["first", "second", "third"]`) | 
 | `send_message(...)`       | Funktion um eine Nachricht zu senden | 
 
-# Beispielbot (Stable v1.0.0 für [stbmv1](/german/stbchat/stbm))
-<Warning>Dieser Dokumentationsteil gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
 
-Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
+### Commands (Originale Methode)
+Wie du [hier](/german/scapi/usage#commands-commands-modul) erfahren hast, besitzt Scapi 2 verschiedene Methoden um ein Bot-Command zu schreiben.
+Dieser Teil zeigt dir, wie du die andere Methode verwendest. 
 
-Die andere Methode ist die Originale. Diese ist etwas mehr schwierig, kann aber mehr angepasst werden. Diese Methode wird weiterhin für reine `on_message`
+Diese ist etwas mehr schwierig, kann aber mehr angepasst werden. Diese Methode wird weiterhin für reine `on_message`
 Events verwendet um reine Nachrichten zu akzeptieren & zu verarbeiten.
-Diese Methode heißt `Original`.
 
-<Tip>Wir empfehlen die Verwendung der Commands Methode da diese mehr Features besitzt & mehr Support bietet als die Originale Methode (z.B. Berechtigungen)</Tip>
+<Tip>Wir empfehlen die Verwendung der Commands-Methode da diese mehr Features besitzt & mehr Support bietet als die Originale Methode (z.B. Berechtigungen)</Tip>
+
+```python
+def Commands():
+    while True:
+        try:
+            message = Bot.recv_message(raw=True)
+        
+            if message.startswith("!hello"):
+                Bot.send_message(f"Hello, world!")
+                    
+        except: 
+            Bot.logger(
+                f"{scapi.RED}An unknown exception occured{scapi.RESET}",
+                type=Scapi.LogLevel.ERROR
+                )
+
+            break
+```
+
+| Code                                  | Erklärung |
+|---------------------------------------|-----------|
+| `Commands()`                          | Erstellt eine Funktion für das allgemeine verarbeiten der empfangenden Nachrichten & Commands | 
+| `while True`                          | Eine Schleife die nie endet, um immer die Nachrichten zu empfangen | 
+| `Bot.recv_message(raw=True)`          | Empfängt die Nachrichten in einem rohen Format (Ohne Farben) | 
+| `if message.startswith("!hello")`     | Kontrolliert, ob die empfangende Nachricht mit `!hello` startet | 
+| `send_message(...)`                   | Funktion um eine Nachricht zu senden | 
+
+
+
+# Beispielbot (Stable v1.0.0 für [stbmv1](/german/stbchat/stbm))
+<Warning>Dieser Beispielbot gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
 
 <CodeGroup>
     ```python Command Methode
