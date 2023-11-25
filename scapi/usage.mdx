@@ -277,3 +277,27 @@ The following piece of code shows you how to make a simple bot with Scapi Canary
 </CodeGroup>
 
 Changing the value `json` to `False` will enable the compatibility mode. Note that this is not yet fully developed 
+
+### @on_message Events
+As of Scapi v0.13, we have added an improved version of the original message method. This uses our modern Python standard and Python decorators.
+The implementation in your bot code is very simple. You only need at least Scapi v0.13 or higher.
+A bot message event can look like this:
+
+```python
+# Python decorator to define the message event
+@Bot.on_message(message="Hello")
+# Definition of the function in order to execute it automatically afterwards
+def on_hello_message(username: str): 
+    # The code of the function, e.g what is to be executed [...]
+    Bot.send_message(f"Hello {username}!") 
+```
+
+<Warning>
+    Not all functions of the old original method could be adopted, therefore the `@on_message` method is more restricted.
+
+    The following functions could not be implemented so far (but could appear in a different form in the future):
+    - Use of .startswith()
+    - Recognizing specific words within the message
+
+    **This feature is currently only used, for example, to process a normal word from a user and reply to it.**
+</Warning>
