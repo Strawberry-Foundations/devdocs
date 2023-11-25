@@ -103,6 +103,37 @@ def Commands():
             break
 ```
 
+### Events
+There are certain events that the bot can call up when something specific happens. One of these events is called `on_ready`.
+This event is called when you start the bot. You only have to pass the `on_ready` function as an argument to the `Bot.run()` function.
+
+An `on_ready` event can look like this:
+```python
+@Bot.event
+def on_ready():
+    Bot.logger(
+            f"{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}",
+            type=Scapi.LogLevel.INFO
+            )
+```
+
+### Start the bot
+To start the bot, you first need to know which command method you are using.
+
+<CodeGroup>
+    ```python @commands
+    Bot.run(on_ready)
+    ```
+
+    ```python Original Method
+    BotThread = threading.Thread(target=Bot.run, args=(on_ready,))
+    CommandThread = threading.Thread(target=Commands)
+
+    BotThread.start()
+    CommandThread.start()
+    ```
+</CodeGroup>
+
 
 # Example bot (Stable v1.0.0 for [stbmv1](/stbchat/stbm))
 <Warning>This example bot only applies to scapi legacy v1.0.0-stbmv1</Warning>
