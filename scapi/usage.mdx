@@ -51,6 +51,8 @@ In order for the bot to have a purpose, it needs commands. A simple command look
 <Info>
     Scapi has 2 different methods to write a bot. One method is newer and cleaner but is not yet fully developed. This method is called `Commands`.
     This part explains how to write a command using the command module
+
+    For the other method, you can check out [this](/scapi/usage#commands-original-method) documentation section
 </Info>
 
 ```python
@@ -74,10 +76,36 @@ To clarify what is meant by what, here is a detailed explanation:
 | `send_message(...)`       | Function to send a message | 
 
 
-# Write your first bot (Stable v1.0.0 for [stbmv1](/stbchat/stbm))
-<Warning>This documentation part only applies to scapi legacy v1.0.0-stbmv1</Warning>
+### Commands (Original Method)
+As you have learned [here](/scapi/usage#commands-commands-module), Scapi has 2 different methods to write a bot command.
+This part shows you how to use the other method. 
 
-Scapi has 2 different methods to write a bot. One method is newer and clearer, but is not yet fully developed. This is called `Commands`.
+This one is a bit more difficult, but can be more customized. This method is still used for pure `on_message`
+events to accept & process pure messages.
+
+<Tip>We recommend using the Commands method as it has more features & support than the original method (e.g. permissions)</Tip>
+
+```python
+def Commands():
+    while True:
+        try:
+            message = Bot.recv_message(raw=True)
+        
+            if message.startswith("!hello"):
+                Bot.send_message(f"Hello, world!")
+                    
+        except: 
+            Bot.logger(
+                f"{scapi.RED}An unknown exception occured{scapi.RESET}",
+                type=Scapi.LogLevel.ERROR
+                )
+
+            break
+```
+
+
+# Example bot (Stable v1.0.0 for [stbmv1](/stbchat/stbm))
+<Warning>This example bot only applies to scapi legacy v1.0.0-stbmv1</Warning>
 
 The other method is the original. This is more difficult, but can be adapted considerably more. This method is still used for pure `on_message` events to accept and process pure messages. 
 This method is called `Original`
