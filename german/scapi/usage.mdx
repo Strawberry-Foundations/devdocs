@@ -18,14 +18,64 @@ from scapi import Scapi # Importiere Scapi's Bot Klasse
 
 <Tip>Wir empfehlen YAML für die Konfigurationsdateien zu verwenden. Du kannst YAML mithilfe von `pip` installieren. (`pip install pyyaml`)</Tip>
 
-# Die ersten Schritte
-Um die Basics deines Bot's aufzubauen, benötigst du ein Bot-Objekt. Dieses kannst du mithilfe unserer Bot-Objektklasse erstellen:
+# Schreibe deinen ersten Bot ([stbmv1](/german/stbchat/stbm))
+<Warning>Dieser Dokumentationsteil gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
+
+### Die ersten Schritte
+Um die Basics deines Bots aufzubauen, benötigst du ein Bot-Objekt. Dieses kannst du mithilfe unserer Bot-Objektklasse erstellen:
 ```python
 Bot = Scapi.Bot(username="username", token="bottoken", host="1.2.3.4", port=1234)
 ```
 
+### Flags
+Flags sind ein wichtiger Teil beim Programmieren deines Scapi-Bots.
+Du benötigst Flags um z.B. festzulegen ob du Nachrichten von Nutzern in deinen Bot-Logs sehen willst, oder ob du die Nachrichteneingabe innerhalb der Konsole aktivieren willst.
+Die Definierung deiner Flags könnte so aussehen:
 
-# Schreibe deinen ersten Bot (Stable v1.0.0 für [stbmv1](/german/stbchat/stbm))
+```python
+Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+```
+
+### Berechtigungen
+Ein weiterer Teil deines Bots sind Berechtigungen. Diese überprüfen ob der Nutzer, der einen Command ausgeführt hat, auch die nötigen Berechtigungen besitzt.
+Außerdem kannst du auch festlegen, wer der Bot-Owner ist.
+In Scapi gibt es eine Funktion, welche benutzerdefinierte Werte für die Berechtigungsverwaltung annimmt. Mithilfe dieser Funktion kannst du den Bot-Owner festlegen,
+oder eine Custom-Liste erstellen, und diese anschließend auch innerhalb von Commands verwenden.
+Das festlegen des Owners und einer Custom-Liste kann wie folgt vorgenommen werden:
+
+```python
+Bot.permission_handler(custom_list=["julian"], owner="julian")
+```
+
+### Commands (`@commands` Modul)
+Damit der Bot auch ein Sinn und Zweck hat, braucht der Bot Commands. Ein einfacher Commands sieht wie folgt aus: 
+
+<Info>
+    Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
+    Dieser Teil erklärt wie du einen Command mithilfe des Command-Modules schreiben kannst
+</Info>
+
+```python
+@Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+def test_command(username: str, args: list):
+    Bot.send_message(f"""
+        Username: {username}
+        Args: {args}"""
+        )
+```
+
+Um klarzustellen, wofür was steht, ist hier nun eine detalierte Erklärung:
+
+| Code                      | Erklärung |
+|---------------------------|-----------|
+| `name`                    | Steht für den Command-Namen, welcher anschließend in der Registry eingefügt wird. Du kannst den Command dann mithilfe des Prefixes und dann den Namen aufrufen (z.B. `!test`) | 
+| `arg_count`               | Anzahl der Argumente, die der Befehl annimmt und mindestens benötigt. Es kann auch eine niedrigere Zahl angegeben werden und mehr Argumente trotzdem angenommen werden | 
+| `required_permissions`    | Benötigte Berechtigung für den Command. Hier muss ein Wert der Scapi-Klasse übergeben werden. `Scapi.Bot.PermissionLevel.CUSTOM` für die Custom-Liste, die du [hier](german/scapi/usage#berechtigungen) definiert hast | 
+| `username`                | Der Nutzername, des Benutzers, der den Command ausgeführt hat | 
+| `args`                    | Die Argumente, die beim Ausführen des Commands übergeben wurden. Wird in einer Liste gespeichert (`["first", "second", "third"]`) | 
+| `send_message(...)`       | Funktion um eine Nachricht zu senden | 
+
+# Beispielbot (Stable v1.0.0 für [stbmv1](/german/stbchat/stbm))
 <Warning>Dieser Dokumentationsteil gilt nur für Scapi Legacy v1.0.0-stbmv1</Warning>
 
 Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
