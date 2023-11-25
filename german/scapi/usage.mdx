@@ -113,6 +113,36 @@ def Commands():
 | `if message.startswith("!hello")`     | Kontrolliert, ob die empfangende Nachricht mit `!hello` startet | 
 | `send_message(...)`                   | Funktion um eine Nachricht zu senden | 
 
+### Events
+Es gibt bestimmte Events, die der Bot bei etwas bestimmten aufrufen kann. Einer dieser Events heißt `on_ready`.
+Dieses Event wird aufgerufen, wenn du den Bot startest. Du musst nur bei der `Bot.run()` Funktion als Argument die `on_ready` Funktion übergeben.
+
+Ein `on_ready` Event kann so aussehen:
+```python
+@Bot.event
+def on_ready():
+    Bot.logger(
+            f"{scapi.BLUE}{Bot.username} started successfully!{scapi.RESET}",
+            type=Scapi.LogLevel.INFO
+            )
+```
+
+### Den Bot starten 
+Um den Bot zu starten musst du zuerst darauf achten, welche Command Methode du verwendest.
+
+<CodeGroup>
+    ```python @commands
+    Bot.run(on_ready)
+    ```
+
+    ```python Originale Methode
+    BotThread = threading.Thread(target=Bot.run, args=(on_ready,))
+    CommandThread = threading.Thread(target=Commands)
+
+    BotThread.start()
+    CommandThread.start()
+    ```
+</CodeGroup>
 
 
 # Beispielbot (Stable v1.0.0 für [stbmv1](/german/stbchat/stbm))
