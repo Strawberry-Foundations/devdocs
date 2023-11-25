@@ -18,11 +18,61 @@ from scapi import Scapi # import the scapi bot class
 
 <Tip>We recommend using YAML for configuration files. You can install YAML using `pip` (`pip install pyyaml`)</Tip>
 
-# First steps
+# Write your first bot ([stbmv1](/stbchat/stbm))
+### First steps
 To set up the basics of your bot, you need a bot object. You can create this using our bot object class:
 ```python
 Bot = Scapi.Bot(username="username", token="bottoken", host="1.2.3.4", port=1234)
 ```
+
+### Flags
+Flags are an important part of programming your Scapi bot.
+You need flags to determine, for example, whether you want to see messages from users in your bot logs or whether you want to activate message input within the console.
+The definition of your flags could look like this:
+
+```python
+Bot.flag_handler(print_recv_msg=True, enable_user_input=True)
+```
+
+### Permissions
+Another part of your bot are authorizations. These check whether the user who has executed a command also has the necessary authorizations.
+You can also define who the bot owner is.
+There is a function in Scapi that accepts user-defined values for authorization management. You can use this function to define the bot owner,
+or create a custom list and then use it within commands.
+The owner and a custom list can be defined as follows:
+
+```python
+Bot.permission_handler(custom_list=["julian"], owner="julian")
+```
+
+### Commands (`@commands` Module)
+In order for the bot to have a purpose, it needs commands. A simple command looks like this:
+
+<Info>
+    Scapi has 2 different methods to write a bot. One method is newer and cleaner but is not yet fully developed. This method is called `Commands`.
+    This part explains how to write a command using the command module
+</Info>
+
+```python
+@Bot.command(name="test", arg_count=1, required_permissions=Scapi.Bot.PermissionLevel.CUSTOM)
+def test_command(username: str, args: list):
+    Bot.send_message(f"""
+        Username: {username}
+        Args: {args}"""
+        )
+```
+
+To clarify what is meant by what, here is a detailed explanation:
+
+| Code                      | Explanation |
+|---------------------------|-------------|
+| `name`                    | Stands for the command name, which is then added to the registry. You can then call up the command using the prefix and then the name (e.g. `!test`) | 
+| `arg_count`               | Number of arguments that the command accepts and requires as a minimum. A lower number can also be specified and more arguments can still be accepted | 
+| `required_permissions`    | Required authorization for the command. A value of the Scapi class must be transferred here. `Scapi.Bot.PermissionLevel.CUSTOM` for the custom list that you have defined [here](/scapi/usage#permissions) | 
+| `username`                | The user name of the user who executed the command | 
+| `args`                    | The arguments that were passed when the command was executed. Is saved in a list (`["first", "second", "third"]`) | 
+| `send_message(...)`       | Function to send a message | 
+
 
 # Write your first bot (Stable v1.0.0 for [stbmv1](/stbchat/stbm))
 <Warning>This documentation part only applies to scapi legacy v1.0.0-stbmv1</Warning>
