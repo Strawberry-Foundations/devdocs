@@ -27,6 +27,11 @@ To set up the basics of your bot, you need a bot object. You can create this usi
 Bot = Scapi.Bot(username="username", token="bottoken", host="1.2.3.4", port=1234)
 ```
 
+In order for the bot to log in to the server, you need to add an important function
+```python
+Bot.login()
+```
+
 ### Flags
 Flags are an important part of programming your Scapi bot.
 You need flags to determine, for example, whether you want to see messages from users in your bot logs or whether you want to activate message input within the console.
