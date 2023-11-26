@@ -363,6 +363,25 @@ To clarify what is meant by what, here is a detailed explanation:
 | `args`                    | The arguments that were passed when the command was executed. Is saved in a list (`["first", "second", "third"]`) | 
 | `send_message(...)`       | Function to send a message | 
 
+You can find more commands here
+<AccordionGroup>
+  <Accordion title="Direct messages" icon="message" iconType="duotone">
+    ````python
+    @Bot.command(name="dm", arg_count=1)
+    def send_dm_command(username: str, args: list):
+        Bot.send_direct_message(username, " ".join(args))
+    ````
+  </Accordion>
+
+  <Accordion title="Leave the chat" icon="door-open" iconType="duotone">
+    ````python
+    @Bot.command(name="exit",
+                required_permissions=Scapi.Bot.PermissionLevel.OWNER)
+    def exit_command(username: str, args: list):
+        Bot.exit()
+    ````
+  </Accordion>
+</AccordionGroup>
 
 ### Commands (Original Method)
 <Warning>
