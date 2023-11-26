@@ -290,13 +290,14 @@ In this table you can see all available arguments with their meaning
 | `username`                | The user name of the bot | 
 | `token`                   | The token (password) of the bot | 
 | `host`                    | Remote server where the bot should connect to | 
+| `prefix`                  | The prefix of the bot to which it should listen (e.g. `!help`) | 
 | `port`                    | The port of the remote server | 
 | `enable_user_input`       | Activate message input within the console (Also available as a flag) | 
 | `print_recv_msg`          | Output received messages to the bot logs (console) (Also available as a flag) | 
 | `json`                    | Activates or deactivates the compatibility mode for old servers | 
 
 <Warning>The argument `json` is only available since Scapi Canary v0.12.1</Warning>
-
+<Warning>The argument `prefix` is only available since Scapi Canary v0.13.1b2</Warning>
 
 In order for the bot to log into the server, you need to add an important function
 ```python
