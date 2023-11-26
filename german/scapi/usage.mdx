@@ -294,12 +294,14 @@ In dieser Tabelle siehst du alle verfügbaren Argumente mit ihrer Bedeutung
 | `username`                | Der Nutzername des Bots | 
 | `token`                   | Der Token (Passwort) des Bots | 
 | `host`                    | Remote-Server, wo der Bot sich mit verbinden soll | 
+| `prefix`                  | Der Prefix des Bots, worauf er hören soll (z.B. `!help`) | 
 | `port`                    | Der Port des Remote-Servers | 
 | `enable_user_input`       | Aktiviere die Nachrichteneingabe innerhalb der Konsole (Auch als Flag verfügbar) | 
 | `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) (Auch als Flag verfügbar) | 
 | `json`                    | Aktiviert oder deaktiviert den Kompatiblitätsmodus für alte Server | 
 
 <Warning>Das Argument `json` ist erst seit Scapi Canary v0.12.1 verfügbar</Warning>
+<Warning>Das Argument `prefix` ist erst seit Scapi Canary v0.13.1b2 verfügbar</Warning>
 
 
 Damit der Bot sich im Server auch einloggt, musst du noch eine wichtige Funktion hinzufügen
