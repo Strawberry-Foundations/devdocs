@@ -17,25 +17,25 @@ Our internal name for this is `stbm` or Strawberry Communication System.
 
 For supported versions, see this chart below
 
-|                               | v1.8.0 - v1.8.1 ![](https://img.shields.io/badge/Legacy-green) | v1.8.2 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Canary-yellow) |
+|                               | v1.8.0 - v1.8.1 ![](https://img.shields.io/badge/Legacy-green) | v1.8.2 ![](https://img.shields.io/badge/Stable-success) | v1.9.0 ![](https://img.shields.io/badge/Dev-cyan) |
 |-------------------------------|----------------------------------------------------------------|---------------------------------------------------------|--------------------------------------------------------|
 | Legacy `(stbmv1)` `v1.0.0`    |  ✅                                                            | ✅                                                     | ❌²                                                    |
-| Canary `(stbmv2)` `v0.12.0`   |  ✅ (CM¹)                                                      | ✅ (CM¹)                                               | ✅                                                     | 
-| Canary `(stbmv2)` `>=v0.12.1` |  ✅ (CM³)                                                      | ✅ (CM³)                                               | ✅                                                     | 
+| Dev `(stbmv2)` `v0.12.0`      |  ✅ (CM¹)                                                      | ✅ (CM¹)                                               | ✅                                                     | 
+| Dev `(stbmv2)` `>=v0.12.1`    |  ✅ (CM³)                                                      | ✅ (CM³)                                               | ✅                                                     | 
 
 <Tip>
     ### Compatibility Mode (CM)
-    As of Scapi Canary v0.12.0, we have added a feature that allows bots to connect to old servers.
+    As of Scapi Dev v0.12.0, we have added a feature that allows bots to connect to old servers.
     This is called Compatibility Mode.
     [See more](/json-communication/introduction)
 </Tip>
 
-<Warning>Manual configuration of the compatibility mode is currently only available for Scapi Canary v0.12.1.</Warning>
+<Warning>Manual configuration of the compatibility mode is currently only available for Scapi Dev v0.12.1.</Warning>
 
-**¹** Scapi Canary `v0.12.0 (stbmv2)` does not have manual configuration of the compatibility mode. You must change an argument in Scapi's source code for the configuration.
-We therefore recommend to always use the latest available version from our [Canary GitHub branch](https://github.com/Strawberry-Foundations/strawberry-chat/tree/json-communication)
+**¹** Scapi Dev `v0.12.0 (stbmv2)` does not have manual configuration of the compatibility mode. You must change an argument in Scapi's source code for the configuration.
+We therefore recommend to always use the latest available version from our [Dev GitHub branch](https://github.com/Strawberry-Foundations/strawberry-chat/tree/main)
 
-**²** Scapi Stable/Dev (Legacy) `v1.0.0/v0.11.0` only supports the old, legacy communication system `(stbmv1)` (*Server v1.8.1 or lower*).
+**²** Scapi Legacy `v1.0.0/v0.11.0` only supports the old, legacy communication system `(stbmv1)` (*Server v1.8.1 or lower*).
 Using `v0.11.0` on a newer server (v1.9.0 or higher) will result in broken messages
 
 **³** To enable compatibility mode for Strawberry Chat, you need to change the assigned value for `json` to `False`.
@@ -43,4 +43,4 @@ This could look like the following:
 ```python
 Bot = Scapi.Bot(username=username, token=token, host=host, port=port, json=False)
 ```
-[Find out more about the new communication system and how it works with Scapi](/scapi/usage#write-your-first-bot-canary-v0-12-0-for-stbmv2)
+[Find out more about the new communication system and how it works with Scapi](/scapi/usage#write-your-first-bot-stbmv2)
