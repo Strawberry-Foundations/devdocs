@@ -2,3 +2,39 @@
 title: Introduction to Strawberry Chat
 description: What is Strawberry Chat?
 ---
+
+# Configuration
+We use [YAML](https://yaml.org/) for the configuration of Strawberry Chat.
+So that you don't have to write the whole configuration yourself, we have a sample configuration ([Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/server/config.yml.example)/[Canary](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/json-communication/server/config.yml.example))
+However, to fully understand which value configures what, you can have a look at this table:
+
+| Server configuration      | Explanation |
+|---------------------------|-----------|
+| `address`                 | The IP address where the server can be reached (e.g. `192.168.0.157`) | 
+| `port`                    | The associated and required port (e.g. `49200` --> `192.168.0.157:49200`) | 
+| `name`                    | The name of the chat server (server name) (e.g. `My personal Server!`) | 
+| `description`             | A description of the chat server (e.g. `This is my personal chat server`) | 
+| `edition_key`             | A non-developed argument for configuring an edition | 
+| `update`                  | The update channel of the chat server (`stable`, `dev`, `canary`) | 
+| `config_ver`              | Version value of the configuration. Should not be changed. | 
+
+| Flag configuration        | Explanation |
+|---------------------------|-----------|
+| `enable_messages`         | Activates or deactivates the logging of user messages (`true`, `false`) | 
+| `enable_queue`            | Activates or deactivates the queue (`true`, `false`) | 
+| `max_message_length`      | Maximum length of a message (e.g. `256`) | 
+| `max_users`               | Maximum number of online users (e.g. '32') | 
+| `max_registered_users`    | Maximum number of registered users (e.g. '64') | 
+| `debug_mode`              | Activates or deactivates the debug mode. Useful for tracking errors more easily (`true`, `false`) | 
+| `online_mode`             | Activates or deactivates the online mode. This disables all functions of the Strawberry API (Not recommended) (`true`, `false`) | 
+| `require_signing`         | Activates or deactivates the need for a verified client. However, this feature is not yet available (`true`, `false`) | 
+| `signing_key`             | The signing key for the verified clients | 
+| `admins_wait_queue`       | Activates or deactivates whether admins have to wait in the queue. (`true`, `false`) | 
+| `bots_wait_queue`         | Activates or deactivates whether bots have to wait in the queue. (`true`, `false`) | 
+| `special_messages`        | Activates or deactivates **s p e c i a l** messages (`true`, `false`) | 
+
+<Warning>
+    Some arguments are only available for Canary (`v1.9.0_canary-vacakes-std_stmbv2`).
+
+    These include: `enable_queue`, `max_users`, `max_registered_users`, `admins_wait_queue`, `bots_wait_queue`, `special_messages`
+</Warning>
