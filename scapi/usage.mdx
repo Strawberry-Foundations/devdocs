@@ -276,7 +276,7 @@ flags:
 
 ----
 # Write your first bot ([stbmv2](/german/stbchat/stbm))
-<Warning>This documentation section only applies to Scapi Canary v0.12.0 (stbmv2) or higher</Warning>
+<Warning>This documentation section only applies to Scapi Dev v0.12.0 (stbmv2) or higher</Warning>
 
 ### First steps
 To set up the basics of your bot, you need a bot object. You can create this using our bot object class:
@@ -296,8 +296,8 @@ In this table you can see all available arguments with their meaning
 | `print_recv_msg`          | Output received messages to the bot logs (console) (Also available as a flag) | 
 | `json`                    | Activates or deactivates the compatibility mode for old servers | 
 
-<Warning>The argument `json` is only available since Scapi Canary v0.12.1</Warning>
-<Warning>The argument `prefix` is only available since Scapi Canary v0.13.1b2</Warning>
+<Warning>The argument `json` is only available since Scapi Dev v0.12.1</Warning>
+<Warning>The argument `prefix` is only available since Scapi Dev v0.13.1b2</Warning>
 
 In order for the bot to log into the server, you need to add an important function
 ```python
@@ -319,7 +319,7 @@ In this table you can see all available flags with their meaning
 | `print_recv_msg`          | Output received messages to the bot logs (console) | 
 | `enable_user_input`       | Activate message input within the console | 
 | `log_msg`                 | Change the format of the log messages | 
-| `ignore_capitalization`   | Activates or deactivates the ignoring of capital letters for the `on_message` method (**only available from Scapi Canary v0.13**) | 
+| `ignore_capitalization`   | Activates or deactivates the ignoring of capital letters for the `on_message` method (**only available from Scapi Dev v0.13**) | 
 
 
 ### Permissions
@@ -340,7 +340,7 @@ In order for the bot to have a purpose, it needs commands. A simple command look
     Scapi has 2 different methods to write a bot. One method is newer and cleaner but is not yet fully developed. This method is called `Commands`.
     This part explains how to write a command using the command module. 
 
-    The older method is deprecated since Scapi Canary v0.12.1 and should therefore no longer be used
+    The older method is deprecated since Scapi Dev v0.12.1 and should therefore no longer be used
 </Info>
 
 ```python
@@ -385,7 +385,7 @@ You can find more commands here
 
 ### Commands (Original Method)
 <Warning>
-    The official support for the [original method](/scapi/usage#commands-original-method) has been removed since Scapi Canary v0.12.1.
+    The official support for the [original method](/scapi/usage#commands-original-method) has been removed since Scapi Dev v0.12.1.
     
     To continue using the original method, we recommend the new `@on_message` method (since v0.13). If functionality is missing, please open an [Issue](https://github.com/Strawberry-Foundations/strawberry-chat/issues) on our [GitHub](https://github.com/Strawberry-Foundations/strawberry-chat/)
 
@@ -449,17 +449,17 @@ To start the bot, you first need to know which command method you are using.
     ```
 </CodeGroup>
 
-### Example bot (Canary v0.12.0 or higher)
-<Warning>This documentation part only applies to scapi canary v0.12.0 (stbmv2) or higher</Warning>
+### Example bot (Dev v0.12.0 or higher)
+<Warning>This documentation part only applies to scapi dev v0.12.0 (stbmv2) or higher</Warning>
 
 <Warning>
-    Official support for the [original method](/scapi/usage#commands-original-method) has been removed since Scapi Canary v0.12.1.
+    Official support for the [original method](/scapi/usage#commands-original-method) has been removed since Scapi Dev v0.12.1.
     You can read more about it [here](/scapi/usage#commands-original-method-2)
 </Warning>
 
-Scapi Canary is currently in an development phase and is therefore updated frequently.
-You can get Scapi Canary (`@json-communication`) [here](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/json-communication/bot/scapi.py).
-The following piece of code shows you how to make a simple bot with Scapi Canary
+Scapi Dev is currently in an development phase and is therefore updated frequently.
+You can get Scapi Dev (`@json-communication`/`@main`) [here](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/bot/scapi.py).
+The following piece of code shows you how to make a simple bot with Scapi Dev
 
 <CodeGroup>
     ```python @commands
