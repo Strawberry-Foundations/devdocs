@@ -5,7 +5,7 @@ description: What is Strawberry Chat?
 
 # Configuration
 We use [YAML](https://yaml.org/) for the configuration of Strawberry Chat.
-So that you don't have to write the whole configuration yourself, we have a sample configuration ([Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/server/config.yml.example)/[Canary](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/json-communication/server/config.yml.example))
+So that you don't have to write the whole configuration yourself, we have a sample configuration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/server/config.yml.example)/[Dev](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/server/config.yml.example))
 However, to fully understand which value configures what, you can have a look at this table:
 
 | Server configuration      | Explanation |
@@ -34,7 +34,7 @@ However, to fully understand which value configures what, you can have a look at
 | `special_messages`        | Activates or deactivates **s p e c i a l** messages (`true`, `false`) | 
 
 <Warning>
-    Some arguments are only available for Canary (`v1.9.0_canary-vacakes-std_stmbv2`).
+    Some arguments are only available for Canary/Dev (`v1.9.0_dev-vacakes-std_stmbv2`).
 
     These include: `enable_queue`, `max_users`, `max_registered_users`, `admins_wait_queue`, `bots_wait_queue`, `special_messages`
 </Warning>
