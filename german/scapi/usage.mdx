@@ -280,7 +280,7 @@ flags:
 
 ----
 # Schreibe deinen ersten Bot ([stbmv2](/german/stbchat/stbm))
-<Warning>Dieser Dokumentationsteil gilt nur für Scapi Canary v0.12.0 (stbmv2) oder höher</Warning>
+<Warning>Dieser Dokumentationsteil gilt nur für Scapi Dev v0.12.0 (stbmv2) oder höher</Warning>
 
 ### Die ersten Schritte
 Um die Basics deines Bots aufzubauen, benötigst du ein Bot-Objekt. Dieses kannst du mithilfe unserer Bot-Objektklasse erstellen:
@@ -300,8 +300,8 @@ In dieser Tabelle siehst du alle verfügbaren Argumente mit ihrer Bedeutung
 | `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) (Auch als Flag verfügbar) | 
 | `json`                    | Aktiviert oder deaktiviert den Kompatiblitätsmodus für alte Server | 
 
-<Warning>Das Argument `json` ist erst seit Scapi Canary v0.12.1 verfügbar</Warning>
-<Warning>Das Argument `prefix` ist erst seit Scapi Canary v0.13.1b2 verfügbar</Warning>
+<Warning>Das Argument `json` ist erst seit Scapi Dev v0.12.1 verfügbar</Warning>
+<Warning>Das Argument `prefix` ist erst seit Scapi Dev v0.13.1b2 verfügbar</Warning>
 
 
 Damit der Bot sich im Server auch einloggt, musst du noch eine wichtige Funktion hinzufügen
@@ -324,7 +324,7 @@ In dieser Tabelle siehst du alle verfügbaren Flags mit ihrer Bedeutung
 | `print_recv_msg`          | Gebe empfangende Nachrichten in die Bot-Logs aus (Konsole) | 
 | `enable_user_input`       | Aktiviere die Nachrichteneingabe innerhalb der Konsole | 
 | `log_msg`                 | Ändere das Format der Log-Nachrichten | 
-| `ignore_capitalization`   | Aktiviert oder deaktiviert das ignorieren von Großbuchstaben für die `on_message` Methode (**Nur verfügbar ab Scapi Canary v0.13**) | 
+| `ignore_capitalization`   | Aktiviert oder deaktiviert das ignorieren von Großbuchstaben für die `on_message` Methode (**Nur verfügbar ab Scapi Dev v0.13**) | 
 
 ### Berechtigungen
 Ein weiterer Teil deines Bots sind Berechtigungen. Diese überprüfen ob der Nutzer, der einen Command ausgeführt hat, auch die nötigen Berechtigungen besitzt.
@@ -344,7 +344,7 @@ Damit der Bot auch ein Sinn und Zweck hat, braucht der Bot Commands. Ein einfach
     Scapi hat 2 verschiedene Methoden um einen Bot zu schreiben. Eine Methode ist neuer und sauberer ist allerdings noch nicht vollständig entwickelt. Diese Methode heißt `Commands`.
     Dieser Teil erklärt wie du einen Command mithilfe des Command-Modules schreiben kannst. 
 
-    Die ältere Methode ist seit Scapi Canary v0.12.1 veraltet und sollte daher auch nicht mehr verwendet werden
+    Die ältere Methode ist seit Scapi Dev v0.12.1 veraltet und sollte daher auch nicht mehr verwendet werden
 </Info>
 
 ```python
@@ -389,7 +389,7 @@ Hier findest du noch weitere Commands
 
 ### Commands (Originale Methode)
 <Warning>
-    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#commands-originale-methode) wurde seit Scapi Canary v0.12.1 abgeschafft.
+    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#commands-originale-methode) wurde seit Scapi Dev v0.12.1 abgeschafft.
     
     Zur Weiterverwendung der Originalen Methode empfehlen wir die neue `@on_message` Methode (Seit v0.13). Bei fehlender Funktionalität bitte ein [Issue](https://github.com/Strawberry-Foundations/strawberry-chat/issues) auf unserem [GitHub](https://github.com/Strawberry-Foundations/strawberry-chat/) öffnen
 
@@ -454,17 +454,17 @@ Um den Bot zu starten musst du zuerst darauf achten, welche Command Methode du v
 </CodeGroup>
 
 
-### Beispielbot (Canary v0.12.0 oder höher)
-<Warning>Dieser Beispielbot gilt nur für Scapi Canary v0.12.0 (stbmv2) oder höher</Warning>
+### Beispielbot (Dev v0.12.0 oder höher)
+<Warning>Dieser Beispielbot gilt nur für Scapi Dev v0.12.0 (stbmv2) oder höher</Warning>
 
 <Warning>
-    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#commands-originale-methode) wurde seit Scapi Canary v0.12.1 abgeschafft.
+    Die Offizielle Unterstützung für die [Originale Methode](/german/scapi/usage#commands-originale-methode) wurde seit Scapi Dev v0.12.1 abgeschafft.
     Du kannst [hier](/german/scapi/usage#commands-originale-methode-2) mehr darüber lesen
 </Warning>
 
-Scapi Canary ist aktuell in einer Entwicklungsphase und wird daher auch aktiv aktualisiert.
-Du kannst Scapi Canary (`@json-communication`) [hier](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/json-communication/bot/scapi.py) erhalten.
-Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Canary erstellen kannst.
+Scapi Dev ist aktuell in einer Entwicklungsphase und wird daher auch aktiv aktualisiert.
+Du kannst Scapi Dev (`@json-communication`/`@main`) [hier](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/bot/scapi.py) erhalten.
+Die folgenden Code-Stücke zeigen dir wie du einen einfachen Bot mit Scapi Dev erstellen kannst.
 
 <CodeGroup>
     ```python @commands
