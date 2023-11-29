@@ -46,7 +46,8 @@
       "pages": [
         "stbchat/introduction",
         "stbchat/stbm",
-        "stbchat/community"
+        "stbchat/community",
+        "stbchat/versions"
       ]
     },
     {
@@ -92,7 +93,8 @@
       "pages": [
         "german/stbchat/introduction",
         "german/stbchat/stbm",
-        "german/stbchat/community"
+        "german/stbchat/community",
+        "german/stbchat/versions"
       ]
     },
     {
