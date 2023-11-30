@@ -114,6 +114,14 @@
       ]
     },
     {
+      "group": "Strawberry ID",
+      "pages": [
+        "german/strawberry-id/introduction",
+        "german/strawberry-id/usage",
+        "german/strawberry-id/features"
+      ]
+    },
+    {
       "group": "JSON Kommunikation",
       "pages": [
         "german/json-communication/introduction",
