@@ -1,0 +1,55 @@
+---
+title: 'Verwendung'
+description: 'Die Implementation von Strawberry ID für deine Website'
+---
+
+# Let's get started!
+<Warning>
+    Für die Reibungslose Funktionalität empfehlen wir, Python Flask zu verwenden.
+</Warning>
+<Warning>
+    Du solltest die Basics von Python sowie Flask kennen.
+</Warning>
+<Warning>
+    Das Misshandeln der Nutzerdaten kann zu einem permamenten Ausschluss von Strawberry ID führen und ggf. auch zu mehr strafen!
+</Warning>
+
+Wir werden dir hier zeigen, wie du Strawberry ID Login in deiner Website einbauen kannst!
+
+### Flask App
+Zuerst solltest du natürlich deine Flask App erstellt haben. Wir geben dir ein kleines Beispiel wie du das tun kannst:
+```python
+from flask import *
+import requests
+from urllib.parse import quote
+
+app = Flask(__name__)
+domain = "https://id.strawberryfoundations.xyz/v1/"
+```
+
+### Die API Route
+Ein wichtiger Schritt ist nun die API-Route für dem Empfang des Codes & die Weiterverarbeitung. Die API Route muss `/callback` heißen,
+andersfalls wird Strawberry ID dich nicht richtig weiterleiten!
+
+```python
+# Definierung der API-Route
+@app.route("/callback")
+def strawid():
+    # Leitet dich zur Root-Seite weiter, falls "code" nicht in
+    # den URL-Argumenten enthalten ist
+    if not "code" in request.args:
+        return redirect("/")
+    
+    # Gebe die empfangenen Daten zurück 
+    # WARNUNG: Nur ein Beispiel. Bitte nicht in Produktion nutzen
+    return requests.get(
+        domain + "validate?code=" + quote(request.args["code"])
+        ).json()["data"]
+```
+
+### Aufruf
+Nun kannst du die Strawberry ID Website aufrufen. Vergiss aber nicht bestimmte URL-Argumente zu übergeben, andersfalls leitet dich Strawberry ID nicht richtig weiter!
+```
+https://id.strawberryfoundations.xyz/v1/de?redirect=https://yoururl.com
+```
+![](https://media.discordapp.net/attachments/1099743672083419140/1179855756200255529/image.png)
