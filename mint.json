@@ -47,7 +47,8 @@
         "stbchat/introduction",
         "stbchat/stbm",
         "stbchat/community",
-        "stbchat/versions"
+        "stbchat/versions",
+        "stbchat/errorcodes"
       ]
     },
     {
