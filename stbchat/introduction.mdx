@@ -4,6 +4,7 @@ description: What is Strawberry Chat?
 ---
 
 # Configuration
+### Server
 We use [YAML](https://yaml.org/) for the configuration of Strawberry Chat.
 So that you don't have to write the whole configuration yourself, we have a sample configuration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/server/config.yml.example)/[Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/1.9.0/server/config.yml.example))
 However, to fully understand which value configures what, you can have a look at this table:
@@ -37,4 +38,96 @@ However, to fully understand which value configures what, you can have a look at
     Some arguments are only available for v1.9.0 (`v1.9.0-vacakes-std_stmbv2`).
 
     These include: `enable_queue`, `max_users`, `max_registered_users`, `admins_wait_queue`, `bots_wait_queue`, `special_messages`
+</Warning>
+
+### Client
+We also use [YAML](https://yaml.org/) for the configuration of our client.
+So that you don't have to write the entire configuration yourself, we have a sample configuration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/client/config.yml.example)/[Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/1.9.0/client/config.yml.example)/[Main](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/client/config.yml.example))
+However, to fully understand which value configures what, you can have a look at this table:
+
+| Client configuration          | Explanation |
+|-------------------------------|-------------|
+| `language`                    | The language of the client (`de_DE`, `en_US`) | 
+| `update_channel`              | The update channel of the client (`stable`, `dev`, `canary`) | 
+| `detect_same_system_messages` | Activates or deactivates the recognition of identical system messages (`true`, `false`) | 
+| `config_ver`                  | Version value of the configuration. Should not be changed. | 
+| `enable_notifications`        | Activates or deactivates the chat notification (`true`, `false`) | 
+
+<Warning>
+    The argument `enable_notifications` is only available for v2.6.0 or higher.
+</Warning>
+
+---
+#### Networking
+
+<Info>
+    This configuration part refers to the network behavior of the client. The following code block only works as of v2.6.0
+```yaml
+networking:
+  online_mode: false
+  keep_alive: true
+  latency_mode: false
+  latency_mode_time: 1
+```
+</Info>
+
+| Networking configuration      | Explanation |
+|-------------------------------|-------------|
+| `online_mode`                 | Activates or deactivates the online mode. This disables all functions of the Strawberry API (Not recommended) (`true`, `false`) |
+| `keep_alive`                  | Enables or disables keep-alive pings to the server. Deactivating causes you to be disconnected from the server after a certain time. (`true`, `false`) | 
+| `latency_mode`                | Activates or deactivates the latency mode. This is used to continue to offer stability with a slow connection (`true`, `false`) | 
+| `latency_mode_time`           | The time between certain latency events (e.g. `1`, `2`, `0.5`) | 
+
+<Warning>
+    Some arguments are only available for v2.6.0.
+    These include: `latency_mode`, `latency_mode_time`.
+</Warning>
+
+---
+#### Autoserver
+
+<Info>
+    This configuration section refers to the autoserver behavior of the client.
+```yaml
+autoserver:
+  enabled: false
+  server_id: 2
+```
+</Info>
+
+| Autoserver configuration      | Explanation |
+|-------------------------------|-------------|
+| `enabled`                     | Activates or deactivates autoserver (automatic connection to a server when the client is started) (`true`, `false`) |
+| `server_id`                   | Server ID of the server (e.g. `1`, `2`) | 
+
+#### Preconfigured servers
+<Info>
+    This configuration section refers to preconfigured servers. An example configuration could be structured as follows:
+```yaml
+2: 
+name: localhost
+address: 127.0.0.1
+port: 8080
+type: Local Development Server
+autologin: true
+compatibility_mode: false
+credentials:
+    username: username
+    password: password
+```
+</Info>
+
+| Server configuration          | Explanation |
+|-------------------------------|-------------|
+| `name`                        | Name of the server (e.g. `My server`) |
+| `address`                     | IP address of the server (e.g. `127.0.0.1`) |
+| `port`                        | Port of the server (e.g. `8080`) |
+| `type`                        | A separate type description of the server (e.g. `programming`, `school`) |
+| `autologin`                   | Activates or deactivates Autologin for this server (`true`, `false`) |
+| `compatibility_mode`          | Activates or deactivates the compatibility mode for this server (`true`, `false`) |
+| `credentials/username`        | The user name required for Autologin (e.g. `user`) |
+| `credentials/username`        | The password required for Autologin (e.g. `password`) |
+
+<Warning>
+    The `compatibility_mode` argument is only available for v2.5.0 or higher.
 </Warning>
