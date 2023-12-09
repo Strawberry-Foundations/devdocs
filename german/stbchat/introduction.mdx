@@ -28,16 +28,37 @@ Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst d
 | `max_registered_users`    | Maximale Anzahl der registrierten Nutzern (z.B. `64`) | 
 | `debug_mode`              | Aktiviert oder deaktiviert den Debug-Mode. Nützlich um Fehler einfacher nachzuverfolgen (`true`, `false`) | 
 | `online_mode`             | Aktiviert oder deaktiviert den Online-Mode. Dies deaktiviert jegliche Funktionen der Strawberry API (Nicht empfohlen) (`true`, `false`) |
-| `require_signing`         | Aktiviert oder deaktiviert das benötigen eines verifizierten Clients. Dieses Feature ist allerdings noch nicht verfügbar (`true`, `false`) | 
-| `signing_key`             | Der Signierungs-Key für die verifizierten Clients | 
 | `admins_wait_queue`       | Aktiviert oder deaktiviert ob Admins in der Warteschlange warten müssen. (`true`, `false`) | 
 | `bots_wait_queue`         | Aktiviert oder deaktiviert ob Bots in der Warteschlange warten müssen. (`true`, `false`) | 
 | `special_messages`        | Aktiviert oder deaktiviert **b e s o n d e r e** Nachrichten (`true`, `false`) | 
+
+| Sicherheits-Konfiguration | Erklärung |
+|---------------------------|-----------|
+| `require_signing`         | Aktiviert oder deaktiviert das benötigen eines verifizierten Clients. Dieses Feature ist allerdings noch nicht verfügbar (`true`, `false`) | 
+| `signing_key`             | Der Signierungs-Key für die verifizierten Clients | 
+| `banned_ips`              | Eine Liste an gebannten IP-Adressen (z.B. [192.168.0.157]) | 
+
+| Datenbank-Konfiguration   | Erklärung |
+|---------------------------|-----------|
+| `driver`                  | Der verwendete Treiber für die Datenbankverwaltung (`sqlite`, `mysql`) | 
+| `check_same_thread`       | Aktiviert oder deaktiviert die Erkennung ob etwas im gleichen Thread abläuft (`true`, `false`) | 
+| `host`                    | MySQL Datenbank Host | 
+| `port`                    | MySQL Datenbank Port | 
+| `user`                    | MySQL Datenbank Nutzername | 
+| `password`                | MySQL Datenbank Nutzerpasswort | 
+| `database_name`           | MySQL Datenbankname | 
+| `database_table`          | MySQL Datenbanktabelle | 
 
 <Warning>
     Einige Argumente sind nur für v1.9.0 (`v1.9.0-vacakes-std_stmbv2`) verfügbar.
 
     Darunter zählen: `enable_queue`, `max_users`, `max_registered_users`, `admins_wait_queue`, `bots_wait_queue`, `special_messages`
+</Warning>
+
+<Warning>
+    Einige Argumente sind nur für v1.10.0 (`v1.10.0-vacakes-std_stmbv2`) verfügbar.
+
+    Darunter zählen: `banned_ips, driver, check_same_thread, host, port, user, password, database_name, database_table`
 </Warning>
 
 ---
