@@ -4,8 +4,9 @@ description: Was ist Strawberry Chat?
 ---
 
 # Konfiguration
+### Server
 Wir verwenden [YAML](https://yaml.org/) für die Konfiguration von Strawberry Chat.
-Damit du nicht die ganze Konfiguration selber schreiben musst, haben wir eine Beispielkonfiguration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/server/config.yml.example)/[Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/1.9.0/server/config.yml.example))
+Damit du nicht die ganze Konfiguration selber schreiben musst, haben wir eine Beispielkonfiguration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/server/config.yml.example)/[Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/1.9.0/server/config.yml.example)/[Main](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/client/config.yml.example))
 Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst du dir diese Tabelle anschauen:
 
 | Server-Konfiguration      | Erklärung |
@@ -15,7 +16,7 @@ Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst d
 | `name`                    | Der Name des Chat-Servers (Server Name) (z.B. `My personal Server!`) | 
 | `description`             | Eine Beschreibung über den Chat-Server (z.B. `This is my personal chat server`) | 
 | `edition_key`             | Ein nicht-entwickeltes Argument zur Konfiguration einer Edition | 
-| `update`                  | Der Update-Kanal des Chat Servers (`stable`, `dev`, `canary`) | 
+| `update_channel`          | Der Update-Kanal des Chat Servers (`stable`, `dev`, `canary`) | 
 | `config_ver`              | Versions-Wert der Konfiguration. Sollte nicht geändert werden. | 
 
 | Flag-Konfiguration        | Erklärung |
@@ -26,7 +27,7 @@ Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst d
 | `max_users`               | Maximale Anzahl der Online-Nutzern (z.B. `32`) | 
 | `max_registered_users`    | Maximale Anzahl der registrierten Nutzern (z.B. `64`) | 
 | `debug_mode`              | Aktiviert oder deaktiviert den Debug-Mode. Nützlich um Fehler einfacher nachzuverfolgen (`true`, `false`) | 
-| `online_mode`             | Aktiviert oder deaktiviert den Online-Mode. Dies deaktiviert jegliche Funktionen der Strawberry API (Nicht empfohlen) (`true`, `false`) | 
+| `online_mode`             | Aktiviert oder deaktiviert den Online-Mode. Dies deaktiviert jegliche Funktionen der Strawberry API (Nicht empfohlen) (`true`, `false`) |
 | `require_signing`         | Aktiviert oder deaktiviert das benötigen eines verifizierten Clients. Dieses Feature ist allerdings noch nicht verfügbar (`true`, `false`) | 
 | `signing_key`             | Der Signierungs-Key für die verifizierten Clients | 
 | `admins_wait_queue`       | Aktiviert oder deaktiviert ob Admins in der Warteschlange warten müssen. (`true`, `false`) | 
@@ -37,4 +38,98 @@ Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst d
     Einige Argumente sind nur für v1.9.0 (`v1.9.0-vacakes-std_stmbv2`) verfügbar.
 
     Darunter zählen: `enable_queue`, `max_users`, `max_registered_users`, `admins_wait_queue`, `bots_wait_queue`, `special_messages`
+</Warning>
+
+---
+
+### Client
+Auch für unseren Client verwenden wir [YAML](https://yaml.org/) für die Konfiguration.
+Damit du nicht die ganze Konfiguration selber schreiben musst, haben wir eine Beispielkonfiguration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/client/config.yml.example)/[Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/1.9.0/client/config.yml.example)/[Main](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/client/config.yml.example))
+Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst du dir diese Tabelle anschauen:
+
+| Client-Konfiguration          | Erklärung |
+|-------------------------------|-----------|
+| `language`                    | Die Sprache des Clients (`de_DE`, `en_US`) | 
+| `update_channel`              | Der Update-Kanal des Clients (`stable`, `dev`, `canary`) | 
+| `detect_same_system_messages` | Aktiviert oder deaktiviert die Erkennung von gleichen Systemnachrichten (`true`, `false`) | 
+| `config_ver`                  | Versions-Wert der Konfiguration. Sollte nicht geändert werden. | 
+| `enable_notifications`        | Aktiviert oder deaktiviert die Chat-Benachrichtung (`true`, `false`) | 
+
+<Warning>
+    Das Argument `enable_notifications` ist nur für v2.6.0 oder höher verfügbar.
+</Warning>
+
+---
+#### Networking
+
+<Info>
+    Dieser Konfigurationsteil bezieht sich auf das Netzwerkverhalten des Clients. Der folgende Code-Block funktioniert nur ab v2.6.0
+```yaml
+networking:
+  online_mode: false
+  keep_alive: true
+  latency_mode: false
+  latency_mode_time: 1
+```
+</Info>
+
+| Networking-Konfiguration      | Erklärung |
+|-------------------------------|-----------|
+| `online_mode`                 | Aktiviert oder deaktiviert den Online-Mode. Dies deaktiviert jegliche Funktionen der Strawberry API (Nicht empfohlen) (`true`, `false`) |
+| `keep_alive`                  | Aktiviert oder deaktiviert Keep-Alive Pings zum Server. Das deaktivieren führt dazu das du nach einer bestimmten Zeit vom Server disconnected wirst. (`true`, `false`) | 
+| `latency_mode`                | Aktiviert oder deaktiviert den Latenz-Modus. Dieser dient dazu bei langsamen Verbindung weiterhin Stabilität zu bieten (`true`, `false`) | 
+| `latency_mode_time`           | Die Zeit zwischen bestimmten "Latency-Events" (z.B. `1`, `2`, `0.5`) | 
+
+<Warning>
+    Einige Argumente sind nur für v2.6.0 verfügbar.
+    Darunter zählen: `latency_mode`, `latency_mode_time`
+</Warning>
+
+---
+#### Autoserver
+
+<Info>
+    Dieser Konfigurationsteil bezieht sich auf das Autoserver-Verhalten des Clients.
+```yaml
+autoserver:
+  enabled: false
+  server_id: 2
+```
+</Info>
+
+| Autoserver-Konfiguration      | Erklärung |
+|-------------------------------|-----------|
+| `enabled`                     | Aktiviert oder deaktiviert Autoserver (Das automatische verbinden mit einem Server beim Start des Clients) (`true`, `false`) |
+| `server_id`                   | Server-ID des Servers (z.B. `1`, `2`) | 
+
+#### Vorkonfigurierte Server
+<Info>
+    Dieser Konfigurationsteil bezieht sich auf Vorkonfigurierte Server. Eine Beispielkonfiguration könnte folgendermaßen aufgebaut sein:
+```yaml
+2: 
+name: localhost
+address: 127.0.0.1
+port: 8080
+type: Local Development Server
+autologin: true
+compatibility_mode: false
+credentials:
+    username: username
+    password: password
+```
+</Info>
+
+| Server-Konfiguration          | Erklärung |
+|-------------------------------|-----------|
+| `name`                        | Name des Servers (z.B. `My server`) |
+| `address`                     | IP-Adresse des Servers (z.B. `127.0.0.1`) |
+| `port`                        | Port des Servers (z.B. `8080`) |
+| `type`                        | Eine eigene Typenbeschreibung des Servers (z.B. `programming`, `school`) |
+| `autologin`                   | Aktiviert oder deaktiviert Autologin für diesen Server (`true`, `false`) |
+| `compatibility_mode`          | Aktiviert oder deaktiviert den Kompatiblitätsmodus für diesen Server (`true`, `false`) |
+| `credentials/username`        | Der Nutzername der für Autologin benötigt wird (z.B. `user`) |
+| `credentials/username`        | Das Passwort das für Autologin benötigt wird (z.B. `password`) |
+
+<Warning>
+    Das Argument `compatibility_mode` ist nur für v2.5.0 oder höher verfügbar.
 </Warning>
