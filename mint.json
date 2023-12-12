@@ -45,7 +45,6 @@
       "group": "Strawberry Chat",
       "pages": [
         "stbchat/introduction",
-        "stbchat/stbm",
         "stbchat/community",
         "stbchat/versions",
         "stbchat/errorcodes"
@@ -94,7 +93,6 @@
       "group": "Strawberry Chat",
       "pages": [
         "german/stbchat/introduction",
-        "german/stbchat/stbm",
         "german/stbchat/community",
         "german/stbchat/versions"
       ]
