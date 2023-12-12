@@ -4,20 +4,94 @@ description: Dies sollte dir eine allgemeine Vorstellung davon geben, worum es b
 ---
 
 # Was ist das?
-Das Strawberry Chat Kommunizierungssystem wird aktuell neu geschrieben.
-Um das alte System vom neuen System zu unterscheiden zu können, führen wir das Strawberry Communication System ein (kurz stbm)
-Dieses Kommunizierungssystem bildet einen Standard für Strawberry Chat und möglicherweise für andere Projekte von Strawberry Foundations.
+Der Strawberry Communication Standard (Strawberry's Kommunikationsstandard) (*kurz stbm, **St**raw**b**erry Co**m**munication Standard*) ist ein Kommunikationstandard für unsere Projekte.
+Das heißt das alle unsere Projekte, die was mit Nachrichtenübertragungen oder ähnliches zu tun haben, dieses System nutzen.
 
-Aktuell haben wir 2 Hauptversionen von stbm.
+Aktuell haben wir 2 Hauptversionen des Strawberry Communication Standards. 
+Um das alte System vom neuen System zu unterscheiden zu können, führen wir das Strawberry Communication System ein (kurz stbm).
+Dieses Kommunikationssystem bildet einen Standard für Strawberry Chat und möglicherweise für andere Projekte von Strawberry Foundations.
 
-Version 1 `(stbmv1)` ist eine "Legacy" Version und erhält keine größeren Updates mehr. Außerdem bieten wir nur noch für eine begrenzte Zeit Support an.
+<Warning>
+    Aktuell planen wir eine Umbennenung der kurzen Version vom Strawberry Communication Standard.
+    Die aktuelle kurze Version ist `stbm` (***St**raw**b**erry Co**m**munication Standard*).
+    Wir planen dies zu `stbc` umzubennenen um möglicherweise weniger Verwirrung zu verursachen
+</Warning>
 
-Version 2 `(stbmv2)` ist eine neue, verbesserte Version unseres Kommunizierungssystems.
-Diese verwendet JSON, um Nachrichten über den Benutzern zu übertragen.
-Mit unserem neuen Kommunizierungsstandard können Nutzer nun ihre eigenen Message Builder erstellen und damit selber entscheiden wie eine Nachricht angezeigt sein soll,
-unabhängig davon wie der Server eigentlich die Nachrichten gesendet hätte.
 
-Zusätzlich gibt es noch Version 2.1 `(stbmv2.1)` für Nachrichten-Proxying, diese Version ist aber aktuell nicht verfügbar.
+<CardGroup cols={1}>
+  <Card title="Strawberry Communication Standard v1" icon="toilet-paper" iconType="duotone" color="#55d799">
+    Version 1 `(stbmv1/stbcv1)` ist eine "Legacy" Version und erhält keine Updates mehr.
+    Diese Version sendete pure Python-Strings über Sockets und der Client empfängt diese ohne vieles entschlüsseln der Daten.
+    Die Daten werden jediglich nur entkodiert.<br></br><br></br>
+
+    <Accordion title="Hinweis" icon="info" iconType="duotone" color="#55d799">
+        Für diese Version bieten wir keinen weiteren Support an.
+        Die letzte Strawberry Chat Version (v1.8.3) mit diesem Kommunikationssystem erschien am 10. Dezember 2023.
+        Dies war die letzte Legacy Version von Strawberry Chat und wird mit der Veröffentlichung von v1.10 oder v1.11 keinen weiteren Support erhalten.
+    </Accordion>
+  </Card>
+
+  <Card title="Strawberry Communication Standard v2" icon="satellite-dish" iconType="duotone" color="#55d799">
+    Version 2 `(stbmv2/stbcv2)` ist eine neue, verbesserte Version unseres Kommunikationssystemes.
+    Diese verwendet JSON, um Nachrichten über den Benutzern zu übertragen.
+    Mit unserem neuen Kommunizierungsstandard können Nutzer nun ihre eigenen Message Builder erstellen und damit selber entscheiden wie eine Nachricht angezeigt sein soll,
+    unabhängig davon wie der Server eigentlich die Nachrichten gesendet hätte.<br></br><br></br>
+
+    <Accordion title="Strawberry Communication Standard v2.1" icon="tower-cell" iconType="duotone" color="#55d799">
+    Zusätzlich gibt es noch Version 2.1 `(stbmv2.1)` für Nachrichten-Proxying, diese Version ist aber aktuell nicht verfügbar.
+    </Accordion>
+  </Card>
+
+  <Card title="Strawberry Communication Standard v3" icon="right-left-large" iconType="duotone" color="#55d799">
+    Version 3 `(stbcv3)` steht noch in Planung.
+    Diese Version implementiert wahrscheinlich das senden von JSON-Daten auf beiden Seiten (Server & Client).
+    Das bedeutet, dass der Client dann auch JSON senden muss. Aufgrund von aktuellen Performanceproblemen steht dies aber noch nicht fest und könnte daher sich noch ändern.
+    Durch die Implementierung von JSON für den Client stehen viele neue Möglichkeiten offen. Dadurch kann der Client spezielle Daten am Server senden und dieser verarbeitet diese.
+    So könnten Commands, die Client-spezifisch sind, am Server verarbeitet werden.
+    
+    Version 3 wird nicht vor 2024 erscheinen. Es könnte aber dazu kommen das wir einige Experimente durchführen um zu schauen ob das Performanceteschnisch probleme verursacht.
+  </Card>
+</CardGroup>
+
+
+| Unterstützte Features  | stbmc1 | stbmc2 | stbmc2.1 | stbmc3 |
+|------------------------|--------|--------|----------|--------|
+| Python Strings¹        | ✅    | ✅     | ✅      | ✅     |
+| pure String Transfer²  | ✅    | ❌     | ✅      | ❌     |
+| JSON Server-to-Client³ | ❌    | ✅     | ✅      | ✅     |
+| JSON Client-to-Server⁴ | ❌    | ❌     | ❌      | ✅     |
+
+
+<AccordionGroup>
+  <Accordion title="Python Strings¹" icon="python" iconType="duotone" color="#55d799">
+    Das Feature Python Strings¹ bedeutet so viel wie "Unterstützung für reine Python-Strings".
+    Dies sollte in jedem Fall immer "Ja"/"✅" sein, andersfalls können keine Strings verwendet werden.
+
+    Die Interne Bezeichnung für Python Strings lautet `ps_com` oder `feat@ps`
+  </Accordion>
+
+  <Accordion title="pure String Transfer²" icon="arrow-right-arrow-left" iconType="duotone" color="#55d799">
+    Das Feature "pure String Transfer" wird für die erste Version des Strawberry Communication Standards verwendet.
+    Dieses Feature verwendet reine Python Strings zum austausch von Daten und Events.
+
+    Die Interne Bezeichnung für pure String Transfer lautet `pST_com` oder `feat@pst`
+  </Accordion>
+
+  <Accordion title="JSON Server-to-Client³" icon="satellite-dish" iconType="duotone" color="#55d799">
+    Das JSON Feature Server-to-Client ist die Weiterentwicklung von pure String Transfer und bietet nun eine kompakte Datenstruktur an,
+    um einfach Daten und Events am Client zu senden. So können auch "leise" Events im Hintergrund passieren
+
+    Die Interne Bezeichnung für JSON Server-to-Client lautet `json_stc` oder `json@stc`
+  </Accordion>
+
+  <Accordion title="JSON Client-to-Server³" icon="satellite" iconType="duotone" color="#55d799">
+    Das JSON Feature Client-to-Server ist die Implementierung von JSON für den Server, sodass der Server nun JSON-Daten vom Client annimmt statt pure String Transfer² Daten.
+    Die zweite Version des Strawberry Communication Standards verwendet von Client zum Server weiterhin pure String Transfer,
+    während die dritte Version vermutlich JSON Client-to-Server verwendet.
+
+    Die Interne Bezeichnung für JSON Client-to-Server lautet `json_cts` oder `json@cts`
+  </Accordion>
+</AccordionGroup>
 
 
 # Was? Wieso? Wie?
