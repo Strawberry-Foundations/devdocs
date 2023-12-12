@@ -1,7 +1,22 @@
 ---
-title: Introduction to JSON Communication
-description: This should give you a general idea what JSON Communication is about
+title: Introduction to the Strawberry Communication Standard
+description: This should give you a general idea what the Strawberry Communication Standard is about
 ---
+
+# What is this?
+The Strawberry Chat communication system is currently being rewritten.
+In order to distinguish between the old system and the new system, we are now introducing the Strawberry Communication System (stbm).
+This communication system forms a standard for Strawberry Chat, and possibly for other Strawberry Foundations projects in the future. 
+
+Currently we have 2 major versions of stbm. 
+Version 1 `(stbmv1)` is a legacy version and no longer receives any new major updates. We only offer support for a certain period of time.
+
+Version 2 `(stbmv2)` is a new, revised version of our communication system.
+This uses JSON to transfer messages via the user.
+With our new communication standard, users can now program their own message builder and decide for themselves how a message should be displayed, regardless of how the server had actually formatted the messages. 
+
+There is also Version 2.1 `(stbmv2.1)` which adds support for message proxying, currently it is not available.
+
 
 # What? Why? How?
 You may wonder and ask yourself what even is this? Well, this is a way how 2 socket instances communicate with
