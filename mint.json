@@ -52,6 +52,13 @@
       ]
     },
     {
+      "group": "Strawberry Communication Standard",
+      "pages": [
+        "json-communication/introduction",
+        "json-communication/implementing"
+      ]
+    },
+    {
       "group": "SCAPI",
       "pages": [
         "scapi/introduction",
@@ -65,13 +72,6 @@
         "spkg/introduction",
         "spkg/usage",
         "spkg/features"
-      ]
-    },
-    {
-      "group": "JSON Communication",
-      "pages": [
-        "json-communication/introduction",
-        "json-communication/implementing"
       ]
     },
     {
@@ -89,6 +89,7 @@
         "german/coreteam"
       ]
     },
+
     {
       "group": "Strawberry Chat",
       "pages": [
@@ -96,6 +97,13 @@
         "german/stbchat/stbm",
         "german/stbchat/community",
         "german/stbchat/versions"
+      ]
+    },
+    {
+      "group": "Strawberry Communication Standard",
+      "pages": [
+        "german/json-communication/introduction",
+        "german/json-communication/implementing"
       ]
     },
     {
@@ -120,13 +128,6 @@
         "german/strawberry-id/introduction",
         "german/strawberry-id/usage",
         "german/strawberry-id/features"
-      ]
-    },
-    {
-      "group": "JSON Kommunikation",
-      "pages": [
-        "german/json-communication/introduction",
-        "german/json-communication/implementing"
       ]
     },
     {
