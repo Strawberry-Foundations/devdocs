@@ -11,6 +11,7 @@ Aktuell haben wir 2 Hauptversionen des Strawberry Communication Standards.
 Um das alte System vom neuen System zu unterscheiden zu können, führen wir das Strawberry Communication System ein (kurz stbm).
 Dieses Kommunikationssystem bildet einen Standard für Strawberry Chat und möglicherweise für andere Projekte von Strawberry Foundations.
 
+### Versionen des Strawberry Communication Standards
 <Warning>
     Aktuell planen wir eine Umbennenung der kurzen Version vom Strawberry Communication Standard.
     Die aktuelle kurze Version ist `stbm` (***St**raw**b**erry Co**m**munication Standard*).
@@ -53,8 +54,9 @@ Dieses Kommunikationssystem bildet einen Standard für Strawberry Chat und mögl
   </Card>
 </CardGroup>
 
+### Unterstützung
 
-| Unterstützte Features  | stbmc1 | stbmc2 | stbmc2.1 | stbmc3 |
+| Unterstützte Features  | stbcv1 | stbcv1 | stbcv2.1 | stbcv3 |
 |------------------------|--------|--------|----------|--------|
 | Python Strings¹        | ✅    | ✅     | ✅      | ✅     |
 | pure String Transfer²  | ✅    | ❌     | ✅      | ❌     |
@@ -92,6 +94,84 @@ Dieses Kommunikationssystem bildet einen Standard für Strawberry Chat und mögl
     Die Interne Bezeichnung für JSON Client-to-Server lautet `json_cts` oder `json@cts`
   </Accordion>
 </AccordionGroup>
+
+
+# Datentypen (stbcv2)
+Ab stbcv2 verwenden wir neue und eigene JSON-Datentypen.
+Hier ist ein kleiner überblick von unseren Datentypen
+
+<AccordionGroup>
+  <Accordion title="Nutzernachrichten (user_message)" icon="user" iconType="duotone" color="#55d799">
+    Nutzernachrichten (`user_message`) sind Nachrichten die von einem Nutzer gesendet wurden.
+    Der Datentyp beinhaltet wichtige Daten, wie z.B. der Nutzername, das Badge, die Rollenfarbe und am wichtigsten, die Nachricht des Nutzers.
+    Die Struktur könnte sich mit stbcv3 ändern.
+
+    ```json JSON
+    {
+        "message_type": "user_message", 
+        "username": "julian",
+        "nickname": "Julian The Great",
+        "badge": "👑",
+        "role_color": "\u001b[31m\u001b[1m",
+        "avatar_url": "https://example.com/some-avatar-url.png",
+        "message": {
+            "content": "Hello World!"
+        }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Systemnachrichten (system_message)" icon="gear" iconType="duotone" color="#55d799">
+    Systemnachrichten (`system_message`) sind Nachrichten die vom System gesendet wurden.
+    Dort handelt es sich meist um Nachrichten, dass ein neuer Nutzer beigetreten ist, allerdings können Systemnachrichten auch die eingebauten Slash-Commands sein.
+    Dieser Datentyp ist ziemlich kompakt und sehr klein. Dies könnte sich aber eventuell mit stbcv3 ändern.
+
+    ```json JSON
+    {
+        "message_type": "system_message", 
+        "message": {
+            "content": "Hello from the system!"
+        }
+    }
+    ```
+  </Accordion>
+
+  <Accordion title="Benachrichtigungs-Backend (stbchat_notification)" icon="bell" iconType="duotone" color="#55d799">
+    Benachrichtigungs-Backend (`stbchat_notification`) sind interne Nachrichtenevents die vom System gesendet wurden.
+    Diese Nachricht siehst du nicht, aber führt im Hintergrund ein Prozess aus, nämlich der, um dir eine Desktop-Benachrichtigung zu senden.
+    Dieser Datentyp ist etwas komplexer. Die Struktur dieses Datentypes könnte sich mit stbcv3 ändern.
+
+    ```json JSON
+    {
+        "message_type": "stbchat_notification",
+        "title": "Strawberry Chat",
+        "username": "Julian",
+        "avatar_url": "https://example.com/some-avatar-url.png",
+        "content": "Hello, Julian!",
+        "bell": true
+    }
+    ```
+
+  </Accordion>
+
+  <Accordion title="Chatdatenübertragungs-Backend (stbchat_backend)" icon="satellite" iconType="duotone" color="#55d799">
+    Chatdatenübertragungs-Backend (`stbchat_backend`) sind interne Nachrichtenevents die vom System gesendet wurden.
+    Diese Nachricht siehst du nicht, aber führt im Hintergrund ein Prozess aus. Dieser Prozess kann unterschiedlich sein.
+    Aktuell sendet `stbchat_backend` nur den Nutzernamen an den Client zurück. Der Client kann den Nutzernamen dann für verschiedene Dinge verwenden.
+    Dieser Datentyp ist aufgrund seiner Neuheit sehr klein. Mit stbcv3 oder vielleicht sogar stbcv2 erhält dieser Datentyp allerdings noch mehr Features und damit eine höhere Bedeutung.    
+
+    ```json JSON
+    {
+        "message_type": "stbchat_backend", 
+        "user_meta": {
+            "username": "Julian"
+        }
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+
 
 
 # Was? Wieso? Wie?
