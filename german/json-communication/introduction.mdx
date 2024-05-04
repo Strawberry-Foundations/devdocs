@@ -44,24 +44,26 @@ Dieses Kommunikationssystem bildet einen Standard für Strawberry Chat und mögl
   </Card>
 
   <Card title="Strawberry Communication Standard v3" icon="right-left-large" iconType="duotone" color="#55d799">
-    Version 3 `(stbcv3)` steht noch in Planung.
-    Diese Version implementiert wahrscheinlich das senden von JSON-Daten auf beiden Seiten (Server & Client).
+    Version 3 `(stbcv3)` wurde mit dem Rust-rewrite von Strawberry Chat veröffentlicht.
+    Diese Version implementiert das senden von JSON-Daten auf beiden Seiten (Server & Client).
     Das bedeutet, dass der Client dann auch JSON senden muss. Aufgrund von aktuellen Performanceproblemen steht dies aber noch nicht fest und könnte daher sich noch ändern.
     Durch die Implementierung von JSON für den Client stehen viele neue Möglichkeiten offen. Dadurch kann der Client spezielle Daten am Server senden und dieser verarbeitet diese.
     So könnten Commands, die Client-spezifisch sind, am Server verarbeitet werden.
-    
-    Version 3 wird nicht vor 2024 erscheinen. Es könnte aber dazu kommen das wir einige Experimente durchführen um zu schauen ob das Performanceteschnisch probleme verursacht.
+
+    Die Veröffentlichung fand am 19. April 2024 statt. Version 3 ist nicht rückwärtskompatibel.
   </Card>
 </CardGroup>
 
 ### Unterstützung
 
-| Unterstützte Features  | stbcv1 | stbcv1 | stbcv2.1 | stbcv3 |
+| Unterstützte Features  | stbcv1 | stbcv2 | stbcv2.1 | stbcv3 |
 |------------------------|--------|--------|----------|--------|
-| Python Strings¹        | ✅    | ✅     | ✅      | ✅     |
+| Python Strings¹        | ✅    | ✅     | ✅      | ❌     |
 | pure String Transfer²  | ✅    | ❌     | ✅      | ❌     |
+| Kompatiblitätsmodus    | ✅    | ✅     | ✅      | ❌     |
 | JSON Server-to-Client³ | ❌    | ✅     | ✅      | ✅     |
 | JSON Client-to-Server⁴ | ❌    | ❌     | ❌      | ✅     |
+| Msgpack                | ❌    | ❌     | ❌      | ✅     |
 
 
 <AccordionGroup>

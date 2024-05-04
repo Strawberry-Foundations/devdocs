@@ -19,13 +19,21 @@ However, to fully understand which value configures what, you can have a look at
 | `update`                  | The update channel of the chat server (`stable`, `dev`, `canary`) | 
 | `config_ver`              | Version value of the configuration. Should not be changed. | 
 
+| General configuration     | Explanation |
+|---------------------------|-----------|
+| `max_message_length`      | Maximum length of a message (e.g. `256`) | 
+| `max_users`               | Maximum number of online users (e.g. '32') | 
+| `max_registered_users`    | Maximum number of registered users (e.g. '64') | 
+| `max_username_length`     | Maximum length of the username (e.g. `32`) |
+| `max_password_length`     | Maximum length of the password (e.g. `32`) |
+| `recv_allowed_bytes`      | Maximum size of the allowed received bytes (e.g. `32`) |
+| `watchdog_timeout`        | Time at which the watchdog should restart the server in the event of a freeze (e.g. `4`) |
+
+
 | Flag configuration        | Explanation |
 |---------------------------|-----------|
 | `enable_messages`         | Activates or deactivates the logging of user messages (`true`, `false`) | 
 | `enable_queue`            | Activates or deactivates the queue (`true`, `false`) | 
-| `max_message_length`      | Maximum length of a message (e.g. `256`) | 
-| `max_users`               | Maximum number of online users (e.g. '32') | 
-| `max_registered_users`    | Maximum number of registered users (e.g. '64') | 
 | `debug_mode`              | Activates or deactivates the debug mode. Useful for tracking errors more easily (`true`, `false`) | 
 | `online_mode`             | Activates or deactivates the online mode. This disables all functions of the Strawberry API (Not recommended) (`true`, `false`) | 
 | `admins_wait_queue`       | Activates or deactivates whether admins have to wait in the queue. (`true`, `false`) | 

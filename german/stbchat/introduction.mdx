@@ -3,10 +3,14 @@ title: Einführung in Strawberry Chat
 description: Was ist Strawberry Chat?
 ---
 
+<Warning>
+    Der Support für v1.9.0 oder niedriger wurde eingestellt. Die folgenden Informationen gelten nur für v1.11.0 oder höher.
+</Warning>
+
 # Konfiguration
 ### Server
 Wir verwenden [YAML](https://yaml.org/) für die Konfiguration von Strawberry Chat.
-Damit du nicht die ganze Konfiguration selber schreiben musst, haben wir eine Beispielkonfiguration ([Legacy](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/legacy/server/config.yml.example)/[Stable](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/1.9.0/server/config.yml.example)/[Main](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/client/config.yml.example))
+Damit du nicht die ganze Konfiguration selber schreiben musst, haben wir eine [Beispielkonfiguration](https://raw.githubusercontent.com/Strawberry-Foundations/strawberry-chat/main/example.config.yml)
 Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst du dir diese Tabelle anschauen:
 
 | Server-Konfiguration      | Erklärung |
@@ -17,15 +21,23 @@ Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst d
 | `description`             | Eine Beschreibung über den Chat-Server (z.B. `This is my personal chat server`) | 
 | `edition_key`             | Ein nicht-entwickeltes Argument zur Konfiguration einer Edition | 
 | `update_channel`          | Der Update-Kanal des Chat Servers (`stable`, `dev`, `canary`) | 
-| `config_ver`              | Versions-Wert der Konfiguration. Sollte nicht geändert werden. | 
+| `config_ver`              | Versions-Wert der Konfiguration. Sollte nicht geändert werden. |
+
+| Allgemeine Konfiguration  | Erklärung |
+|---------------------------|-----------|
+| `max_message_length`      | Maximale Länge einer Nachricht (z.B. `256`) |
+| `max_users`               | Maximale Anzahl der Online-Nutzern (z.B. `32`) | 
+| `max_registered_users`    | Maximale Anzahl der registrierten Nutzern (z.B. `64`) |
+| `max_username_length`     | Maximale Länge des Nutzernamens (z.B. `32`) |
+| `max_password_length`     | Maximale Länge des Passworts (z.B. `256`) |
+| `recv_allowed_bytes`      | Maximale Größe der erlaubten empfangenen Bytes (z.B. `8192`) |
+| `watchdog_timeout`        | Zeit, ab wann der Watchdog den Server bei einem Freeze neu starten soll (z.B. `4`) |
+
 
 | Flag-Konfiguration        | Erklärung |
 |---------------------------|-----------|
 | `enable_messages`         | Aktiviert oder deaktiviert das loggen von Nutzern-Nachrichten (`true`, `false`) | 
 | `enable_queue`            | Aktiviert oder deaktiviert die Warteschlange (`true`, `false`) | 
-| `max_message_length`      | Maximale Länge einer Nachricht (z.B. `256`) | 
-| `max_users`               | Maximale Anzahl der Online-Nutzern (z.B. `32`) | 
-| `max_registered_users`    | Maximale Anzahl der registrierten Nutzern (z.B. `64`) | 
 | `debug_mode`              | Aktiviert oder deaktiviert den Debug-Mode. Nützlich um Fehler einfacher nachzuverfolgen (`true`, `false`) | 
 | `online_mode`             | Aktiviert oder deaktiviert den Online-Mode. Dies deaktiviert jegliche Funktionen der Strawberry API (Nicht empfohlen) (`true`, `false`) |
 | `admins_wait_queue`       | Aktiviert oder deaktiviert ob Admins in der Warteschlange warten müssen. (`true`, `false`) | 
@@ -49,17 +61,6 @@ Allerdings um vollständig zu verstehen, welcher Wert was konfiguriert, kannst d
 | `database_name`           | MySQL Datenbankname | 
 | `database_table`          | MySQL Datenbanktabelle | 
 
-<Warning>
-    Einige Argumente sind nur für v1.9.0 (`v1.9.0-vacakes-std_stmbv2`) verfügbar.
-
-    Darunter zählen: `enable_queue`, `max_users`, `max_registered_users`, `admins_wait_queue`, `bots_wait_queue`, `special_messages`
-</Warning>
-
-<Warning>
-    Einige Argumente sind nur für v1.10.0 (`v1.10.0-vacakes-std_stmbv2`) verfügbar.
-
-    Darunter zählen: `banned_ips, driver, check_same_thread, host, port, user, password, database_name, database_table`
-</Warning>
 
 ---
 
