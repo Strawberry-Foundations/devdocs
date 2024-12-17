@@ -23,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Visit our Website",
-    "url": "https://strawberryfoundations.xyz/"
+    "url": "https://strawberryfoundations.org/"
   },
   "tabs": [
     {
@@ -73,12 +73,9 @@
         "spkg/features"
       ]
     },
-    {
-      "group": "archhelper",
-      "pages": [
-        "archhelper/introduction"
-      ]
-    },
+
+
+
 
     {
       "group": "Einstieg",
@@ -126,12 +123,6 @@
         "german/strawberry-id/introduction",
         "german/strawberry-id/usage",
         "german/strawberry-id/features"
-      ]
-    },
-    {
-      "group": "archhelper",
-      "pages": [
-        "german/archhelper/introduction"
       ]
     }
 

@@ -4,26 +4,74 @@ description: 'Was ist Strawberry ID & wie funktioniert es'
 ---
 
 # Die Basics
-[Strawberry ID](https://id.strawberryfoundations.xyz/v1/de?redirect=https://strawberryfoundations.xyz&hl=de) ist unser universelles Login-System für unsere Produkte. 
+[Strawberry ID](https://id.strawberryfoundations.org/v2/de/login) ist unser universelles Login-System für unsere Produkte. 
 Dieses ist nicht nur extrem flexibel und universell, es kann sogar verwendet werden um die Strawberry ID mit nicht-hauseigenen Produkten zu verwenden.
 
 Auf der [Verwendungsseite von Strawberry ID](/german/strawberry-id/usage) kannst du mehr erfahren, wie du Strawberry ID in deiner Website integrierst!
 
 # Wie es funktioniert
 Strawberry ID arbeitet mit einem sogenannten "Code Login System" welches Nutzern ermöglicht sich mit nur einem einfachen Code auf einer Website oder in einem Programm anzumelden.
-
 Wir haben außerdem ein Sicherheitssystem eingebaut, welches dir anzeigt, ob die von dir besuchte Website sicher ist oder nicht.
-![](https://media.discordapp.net/attachments/1099743672083419140/1179851044025540670/image.png)
-![](https://media.discordapp.net/attachments/1099743672083419140/1179851539720982608/image.png)
 
 <Warning>
     Wir haften an keinen Schäden, die an deinem Account vorkommen, wenn du dich auf nicht-verifizierten Websiten mit Strawberry ID anmeldest.
 </Warning>
 
 # Web-Login
-Das Anmelden auf Websiten funktioniert super einfach. Unsere Websiten (z.B. unsere [Main-Seite](https://strawberryfoundations.xyz/de)) bieten einen einfachen Login-Button.
+Das Anmelden auf Websiten funktioniert super einfach. Unsere Websiten (z.B. unsere [Main-Seite](https://strawberryfoundations.org/de)) bieten einen einfachen Login-Button.
 Wenn du dort drauf klickst weiß Strawberry ID direkt, woher du kommst, und leitet dich anschließend auch wieder weiter. 
 
+```mermaid
+sequenceDiagram
+    participant W as Website
+    participant A as Strawberry ID
+
+    W->>A: Redirects you to the Login page
+    A->>A: Wait for user login
+    A-->>W: Redirects you back to the website on a special endpoint
+    W->>A: Requests user data
+    A-->>W: Returns user data
+```
+
+
+# OAuth-Login
+Der OAuth-Login ist der Nachfolger des Service-Logins und ist sicherer, da du einen Code vorgegeben bekommst, 
+mit dem du dich bei unserer Strawberry ID Website anmelden kannst. Erst bei der Authentifizierung werden deine Account-Daten auf diesen Code gespeichert
+und anschließend ruft das Programm mithilfe unserer API die Daten ab. 
+
+```mermaid
+sequenceDiagram
+    participant P as Program
+    participant A as Request
+    participant A2 as Validation
+    participant A3 as API
+
+    P->>A: Request login code
+    A-->>P: Code: 12345678
+    P->>A2: Request user data from code 12345678
+    P->>A: Check whether the user has authenticated with the code
+    A2-->>A2: Check if user logged in
+    A2-->>A: Delete code 12345678 <br>if the user has requested user data for this code
+    A-->>A: Checks whether the user has requested <br>user data for this code
+    A-->>P: Return user data if authenticated
+    A->>A3: Delete code 12345678
+```
+
 # Service-Login
+<Warning>
+    Der Service-Login ist seit v2 unserer API nicht mehr verfügbar. Bitte verwende stattdessen die OAuth Methode
+</Warning>
+
 Der Service-Login funktioniert anders als der Web-Login. Du erhälst einen Code, den du deinem Programm eingeben musst (z.B. Strawberry Chat).
 Mithilfe des Codes, weiß Strawberry Chat wer du bist, und empfängt deine Nutzerdaten.
+
+```mermaid
+sequenceDiagram
+    participant A as API
+    participant P as Program
+
+    A->>A: Login, and save user data on code 12345678
+    P->>P: Wait for user input ...
+    P->>A: Send code 12345678 to API
+    A->>P: Return user data
+```
